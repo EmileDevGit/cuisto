@@ -2,6 +2,10 @@
 
 ## Les Moineaux
 Le mode de communication de l'équipe est un canal Teams
+Cette équipe est composée de trois développeurs :
+- Kelly Henri Clovis
+- Kristopher Solhtalab
+- Émile Girard
 
 Responsable des communications: [Émile Girard][email]
 
