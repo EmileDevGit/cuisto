@@ -35,12 +35,12 @@ est disponible dans le fichier `analyse.md`
 
 ```mermaid
     erDiagram
-    CATÉGORIE ||--|{ RECETTE : appartenir
-    CATÉGORIE{
+    "CATÉGORIE" ||--|{ RECETTE : appartenir
+    "CATÉGORIE"{
         int id
         string nom
     }
-    RECETTE ||--|{ INGRÉDIENT : avoir
+    RECETTE ||--|{ "INGRÉDIENT" : avoir
     RECETTE{
         int id
         string titre
@@ -50,14 +50,13 @@ est disponible dans le fichier `analyse.md`
         int portions
         int id_categorie
     }
-    INGRÉDIENT
-    INGRÉDIENT{
+    "INGRÉDIENT"{
         int id
         string nom
         int id_recette
     }
-    ÉTAPE }|--|| RECETTE : a
-    ÉTAPE{
+    "ÉTAPE" }|--|| RECETTE : a
+    "ÉTAPE"{
         int id
         int numero_etape
         string description
