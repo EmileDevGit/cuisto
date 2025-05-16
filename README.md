@@ -30,3 +30,36 @@ est disponible dans le fichier `analyse.md`
 [//]: # (Links)
 [email]: (mailto:1649962@crosemont.qc.ca)
 [git-link]:(https://git.dti.crosemont.quebec/egirard/tp2-cahier-de-recettes)
+
+## Diagramme entité-relation
+
+```mermaid
+    erDiagram
+    "CATÉGORIE" ||--|{ RECETTE : appartenir
+    "CATÉGORIE"{
+        int id
+        string nom
+    }
+    RECETTE ||--|{ "INGRÉDIENT" : avoir
+    RECETTE{
+        int id
+        string titre
+        string imageURL
+        string description
+        string tempsPreparation
+        int portions
+        int id_categorie
+    }
+    "INGRÉDIENT"{
+        int id
+        string nom
+        int id_recette
+    }
+    "ÉTAPE" }|--|| RECETTE : a
+    "ÉTAPE"{
+        int id
+        int numero_etape
+        string description
+        int id_recette
+    }
+```
