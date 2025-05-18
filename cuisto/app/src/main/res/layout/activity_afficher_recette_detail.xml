@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AfficherRecetteDetail">
+
+    <Button
+        android:id="@+id/btnAjouteRecetteDetail"
+        android:layout_width="61dp"
+        android:layout_height="56dp"
+        android:backgroundTint="#FEA95B"
+        android:text="+"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/svRechercheRecetteDetail"
+        app:layout_constraintTop_toTopOf="@+id/svRechercheRecetteDetail" />
+
+    <ImageView
+        android:id="@+id/imgVLogoRecetteDetail"
+        android:layout_width="144dp"
+        android:layout_height="98dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <SearchView
+        android:id="@+id/svRechercheRecetteDetail"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="-24dp"
+        android:layout_marginEnd="90dp"
+        android:ems="10"
+        android:iconifiedByDefault="false"
+        android:inputType="text"
+        android:queryHint="Recherche une recette"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgVLogoRecetteDetail" />
+
+    <TextView
+        android:id="@+id/tvIngredientsRecetteDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Les Ingrédients"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNomRecetteDetail" />
+
+    <TextView
+        android:id="@+id/tvEtapesRecetteDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:text="Les étapes de la préparation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvIngredientsRecetteDetail" />
+
+    <TextView
+        android:id="@+id/tvNomRecetteDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="75dp"
+        android:background="#FEA95B"
+        tools:text="Pizza sans fromage"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgVPhotoRecetteDetail" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvIngredientsRecetteDetail"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvIngredientsRecetteDetail" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEtapesRecetteDetail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEtapesRecetteDetail" />
+
+    <ImageView
+        android:id="@+id/imgVPhotoRecetteDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svRechercheRecetteDetail"
+        tools:srcCompat="@tools:sample/avatars" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
