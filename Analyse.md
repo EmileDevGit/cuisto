@@ -49,6 +49,7 @@ Le système doit ...
     - Liste d'ingrédients
     - Catégorie => existante ou nouvelle
     - Ajouter une image
+    - Étape(s) et description
     - _Statistiques (portions, prep time...)_
 - Bouton Ajouter
 - Bouton Retour / Annuler
