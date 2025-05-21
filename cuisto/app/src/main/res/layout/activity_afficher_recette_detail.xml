@@ -56,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:text="Les étapes de la préparation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvIngredientsRecetteDetail" />
@@ -68,13 +68,13 @@
         android:layout_marginStart="75dp"
         android:layout_marginEnd="75dp"
         android:background="#FEA95B"
-        tools:text="Pizza sans fromage"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgVPhotoRecetteDetail" />
+        app:layout_constraintTop_toBottomOf="@+id/imgVPhotoRecetteDetail"
+        tools:text="Pizza sans fromage" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvIngredientsRecetteDetail"
@@ -92,21 +92,45 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEtapesRecetteDetail" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEtapesRecetteDetail"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imgVPhotoRecetteDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/svRechercheRecetteDetail"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCategorieRecetteDetail"
+        app:srcCompat="@drawable/imgdefaut_recette" />
+
+    <TextView
+        android:id="@+id/tvCategorieRecetteDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:text="Categorie | "
+        android:textColor="#AAAAAA"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svRechercheRecetteDetail" />
+
+    <TextView
+        android:id="@+id/tvNomCategorieRecetteDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FEA95B"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCategorieRecetteDetail"
+        app:layout_constraintStart_toEndOf="@+id/tvCategorieRecetteDetail"
+        tools:text="Pizza" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
