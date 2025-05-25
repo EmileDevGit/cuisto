@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="noir">#000000</color>
+    <color name="blanc">#FFFFFF</color>
+    <color name="cuisto_orange">#FEA95B</color>
+    <color name="cuisto_gris">#F1F1F1</color>
+    <color name="cuisto_marron">#653000</color>
+    <color name="cuisto_rouge">#FE665B</color>
+    <color name="cuisto_vert">#00A824</color>
 </resources>
