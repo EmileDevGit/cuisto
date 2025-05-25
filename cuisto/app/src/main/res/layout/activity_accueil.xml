@@ -323,7 +323,7 @@
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/salade_icone_categorie" />
+                android:src="@drawable/icone_pizza_cat" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -343,11 +343,11 @@
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/salade_icone_categorie" />
+                android:src="@drawable/icone_salade_cat" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pizza"
+                android:text="Salade"
                 android:textSize="12sp" />
         </LinearLayout>
         <LinearLayout
@@ -363,11 +363,11 @@
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/salade_icone_categorie" />
+                android:src="@drawable/icone_burger_cat" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pizza"
+                android:text="Burger"
                 android:textSize="12sp" />
         </LinearLayout>
         <LinearLayout
@@ -383,11 +383,11 @@
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/salade_icone_categorie" />
+                android:src="@drawable/icone_pates_cat" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pizza"
+                android:text="Pate"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
