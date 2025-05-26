@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,6 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.AjouterRecetteActivity">
 
+    <!-- Header fixe -->
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="131dp"
@@ -17,15 +19,38 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/cuisto_logo" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiIngredients"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ibImageImport"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ibImageImport"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:background="#F1F1F1"
+            android:gravity="top|start"
+            android:hint="Les ingrédients"
+            android:textSize="12sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <ImageButton
         android:id="@+id/ibImageImport"
-        android:layout_width="158dp"
-        android:layout_height="148dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="119dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
         android:scaleType="centerInside"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo"
         app:srcCompat="@drawable/food_placeholder" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -33,44 +58,116 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/tilCategorie"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ibImageImport">
+        app:layout_constraintTop_toBottomOf="@id/ibImageImport">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietNomRecette"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#F1F1F1"
             android:hint="Nomme ta recette"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:descendantFocusability="afterDescendants"
-            android:importantForAutofill="noExcludeDescendants"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListeEtapes"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAjouterEtape"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNomRecette">
+    <!-- RecyclerView scrollable entre header et footer -->
 
-    </androidx.recyclerview.widget.RecyclerView>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilCategorie"
+        android:layout_width="160dp"
+        android:layout_height="0dp"
+        android:hint="Catégorie"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutNomRecette"
+        app:layout_constraintEnd_toEndOf="@+id/tiIngredients"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayoutNomRecette">
+
+        <AutoCompleteTextView
+            android:id="@+id/actvCategorie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F1F1F1"
+            android:completionThreshold="1"
+            android:inputType="text"
+            android:paddingLeft="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvEtapes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Les étapes de préparation"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutNomRecette"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNomRecette" />
 
     <ImageButton
         android:id="@+id/btnAjouterEtape"
-        android:layout_width="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEtapes"
+        app:layout_constraintStart_toEndOf="@id/tvEtapes"
+        app:layout_constraintTop_toTopOf="@id/tvEtapes"
+        app:srcCompat="@drawable/plus" />
+
+    <!-- RecyclerView scrollable entre header et footer -->
+
+    <!-- Footer fixe avec boutons -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListeEtapes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/footerButtons"
+        app:layout_constraintEnd_toEndOf="@+id/tilCategorie"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/tvEtapes"
+        app:layout_constraintTop_toBottomOf="@id/tvEtapes"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:id="@+id/footerButtons"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="143dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="12dp"
+            android:layout_weight="1"
+            android:backgroundTint="#FD655A"
+            android:text="Annuler"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:cornerRadius="8dp" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="147dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="36dp"
+            android:layout_weight="1"
+            android:backgroundTint="#01A925"
+            android:text="Enregistrer"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
