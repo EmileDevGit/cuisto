@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BoutonSansTint" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@drawable/bouton_arrondi</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
+</resources>
