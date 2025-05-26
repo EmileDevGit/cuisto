@@ -6,11 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 // REMPLACER Article::class PAR LE NOM DE VOTRE CLASSE
-@Database(entities = [Article::class], version = 1)
+@Database(entities = [Recette::class, Etape::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
-    // REMPLACER articleDao() PAR LE NOM DE VOTRE INTERFACE
-    abstract fun articleDao(): ArticleDAO
+    abstract fun recetteDao(): RecetteDAO
 
     companion object {
         @Volatile
