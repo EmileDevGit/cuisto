@@ -48,11 +48,9 @@
         </activity>
 
         <!-- Autres écrans -->
-        <activity android:name=".ui.AccueilActivity" android:exported="false">
+        <activity android:name=".ui.AccueilActivity" android:exported="false"></activity>
+        <activity android:name=".ui.ToutesRecettesActivity" />
 
-
-
-        </activity>
 
     </application>
 

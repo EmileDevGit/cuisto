@@ -277,6 +277,7 @@
             </GridLayout>
 
             <Button
+                android:id="@+id/btn_toutes_recettes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Toutes les recettes"
@@ -296,100 +297,137 @@
     </ScrollView>
 
     <!-- Barre des catégories -->
-    <LinearLayout
+    <HorizontalScrollView
         android:id="@+id/barre_categories"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:orientation="horizontal"
         android:background="@android:color/white"
-        android:gravity="center"
-        android:weightSum="4"
+        android:scrollbars="none"
+        android:fillViewport="true"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"
-            android:weightSum="4"
-            android:padding="8dp">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/icone_pizza_cat" />
-            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Catégorie : Pizza -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pizza"
-                android:textSize="12sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"
-            android:weightSum="4"
-            android:padding="8dp">
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/icone_salade_cat" />
-            <TextView
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_pizza_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pizza"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Catégorie : Salade -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Salade"
-                android:textSize="12sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"
-            android:weightSum="4"
-            android:padding="8dp">
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/icone_burger_cat" />
-            <TextView
+                <ImageView
+                    android:layout_width="76dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_salade_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salade"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <!-- Catégorie : Tacos -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Burger"
-                android:textSize="12sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"
-            android:weightSum="4"
-            android:padding="8dp">
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/icone_pates_cat" />
-            <TextView
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_tacos_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tacos"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Catégorie : Gateau -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pate"
-                android:textSize="12sp" />
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
+
+                <ImageView
+                    android:layout_width="78dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_gateau_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gateau"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Catégorie : Burger -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_burger_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Burger"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Catégorie : Pâtes -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_pates_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pâtes"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
