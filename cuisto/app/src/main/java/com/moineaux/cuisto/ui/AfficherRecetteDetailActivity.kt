@@ -59,7 +59,9 @@ class AfficherRecetteDetailActivity : AppCompatActivity() {
 
         // Remplacer id du recette avec sur quelle image t appuie sur l accueil
         // Recup a partir de l autre ui
-        recetteDetailViewModel.afficherRecette(-1)
+        recetteDetailViewModel.afficherRecette(
+            //idRecette
+        )
 
     }
 }

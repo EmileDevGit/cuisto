@@ -7,6 +7,7 @@ import com.moineaux.cuisto.R
 import com.moineaux.cuisto.data.Etape
 import com.moineaux.cuisto.data.Ingredient
 import androidx.core.net.toUri
+import com.moineaux.cuisto.data.Recette
 
 class AfficherRecetteDetailViewModel: ViewModel() {
     private val _ingredients = MutableLiveData<List<Ingredient>>(emptyList())
@@ -24,7 +25,21 @@ class AfficherRecetteDetailViewModel: ViewModel() {
     private val _imageUri = MutableLiveData<String>()
     val imageUri: LiveData<String> = _imageUri
 
-    fun afficherRecette(idRecette: Int) {
+    fun afficherRecette(//idRecette: Int
+    ) {
+        // Fonction qui cherche la recette dans bd
+        val recette: Recette = Recette(
+            0,
+            "Salade de quinoa",
+            "saladequinoa",
+            "quinoa, concombre, jus de citron",
+            1
+        )
+        val listEtapes : List<Etape> = listOf(
+            Etape(0, 0, 1, "Cuire le quinoa et laisser refroidir."),
+            Etape(0, 0, 2, "Couper le concombre en dés."),
+            Etape(0, 0, 3, "Mélanger le quinoa, le concombre et assaisonner avec le jus de citron, sel et poivre.")
+        )
 
     }
 

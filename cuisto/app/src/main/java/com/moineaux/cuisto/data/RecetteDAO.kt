@@ -15,6 +15,9 @@ interface RecetteDAO {
     @Transaction
     suspend fun insertRecetteAvecEtapes(recette: Recette, listeEtapes: List<String>) {
         val recetteId = sauvegarderRecette(recette)
+
+
+        // À retravailler
         val etapes = listeEtapes.mapIndexed { index, desc ->
             Etape(recetteId = recetteId, ordre = index, description = desc)
         }
