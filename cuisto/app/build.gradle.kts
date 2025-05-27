@@ -41,7 +41,10 @@ android {
 }
 
 dependencies {
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    ksp("com.github.bumptech.glide:compiler:4.16.0")
     ksp(libs.room.compiler)
+
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.room.runtime)
     implementation(libs.androidx.core.ktx)
@@ -50,8 +53,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.recyclerview)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
 }

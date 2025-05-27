@@ -85,198 +85,10 @@
                 android:columnCount="2"
                 android:useDefaultMargins="true">
 
-                <!-- 4 cartes -->
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/saladequinoa" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:background="#AA000000"
-                        android:text="Salade de quinoa"
-                        android:textColor="@android:color/white"
-                        android:padding="8dp"
-                        android:textStyle="bold"
-                        android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|end"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginBottom="35dp"
-                            android:padding="4dp"
-                            android:background="@drawable/fond_icone_arrondi"
-                            android:src="@drawable/edit_icone" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:background="@drawable/fond_icone_arrondi"
-                            android:padding="4dp"
-                            android:src="@drawable/delete_icone"
-                            android:layout_marginStart="8dp" />
-                    </LinearLayout>
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/pizzachevremiel" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:background="#AA000000"
-                        android:text="Pizza chèvre miel noix"
-                        android:textColor="@android:color/white"
-                        android:padding="8dp"
-                        android:textStyle="bold"
-                        android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|end"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginBottom="35dp"
-                            android:padding="4dp"
-                            android:background="@drawable/fond_icone_arrondi"
-                            android:src="@drawable/edit_icone" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:background="@drawable/fond_icone_arrondi"
-                            android:padding="4dp"
-                            android:src="@drawable/delete_icone"
-                            android:layout_marginStart="8dp" />
-                    </LinearLayout>
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/burgersteakfromage" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:background="#AA000000"
-                        android:text="Burger steak fromage"
-                        android:textColor="@android:color/white"
-                        android:padding="8dp"
-                        android:textStyle="bold"
-                        android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|end"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginBottom="35dp"
-                            android:padding="4dp"
-                            android:background="@drawable/fond_icone_arrondi"
-                            android:src="@drawable/edit_icone" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:background="@drawable/fond_icone_arrondi"
-                            android:padding="4dp"
-                            android:src="@drawable/delete_icone"
-                            android:layout_marginStart="8dp" />
-                    </LinearLayout>
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/pateschampignons" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:background="#AA000000"
-                        android:text="Pâtes aux champignons"
-                        android:textColor="@android:color/white"
-                        android:padding="8dp"
-                        android:textStyle="bold"
-                        android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|end"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginBottom="35dp"
-                            android:padding="4dp"
-                            android:background="@drawable/fond_icone_arrondi"
-                            android:src="@drawable/edit_icone" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:background="@drawable/fond_icone_arrondi"
-                            android:padding="4dp"
-                            android:src="@drawable/delete_icone"
-                            android:layout_marginStart="8dp" />
-                    </LinearLayout>
-                </FrameLayout>
             </GridLayout>
 
             <Button
+                android:id="@+id/btn_toutes_recettes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Toutes les recettes"
@@ -296,100 +108,143 @@
     </ScrollView>
 
     <!-- Barre des catégories -->
-    <LinearLayout
+    <HorizontalScrollView
         android:id="@+id/barre_categories"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:orientation="horizontal"
         android:background="@android:color/white"
-        android:gravity="center"
-        android:weightSum="4"
+        android:scrollbars="none"
+        android:fillViewport="true"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"
-            android:weightSum="4"
-            android:padding="8dp">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/icone_pizza_cat" />
-            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Catégorie : Pizza -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pizza"
-                android:textSize="12sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"
-            android:weightSum="4"
-            android:padding="8dp">
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/icone_salade_cat" />
-            <TextView
+                <ImageView
+                    android:id="@+id/cat_pizza"
+                    android:layout_width="60dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_pizza_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pizza"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Catégorie : Salade -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Salade"
-                android:textSize="12sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"
-            android:weightSum="4"
-            android:padding="8dp">
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/icone_burger_cat" />
-            <TextView
+                <ImageView
+                    android:id="@+id/cat_salade"
+                    android:layout_width="76dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_salade_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salade"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <!-- Catégorie : Tacos -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Burger"
-                android:textSize="12sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"
-            android:weightSum="4"
-            android:padding="8dp">
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/icone_pates_cat" />
-            <TextView
+                <ImageView
+                    android:id="@+id/cat_tacos"
+                    android:layout_width="74dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_tacos_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tacos"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Catégorie : Gateau -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pate"
-                android:textSize="12sp" />
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/cat_gateau"
+                    android:layout_width="78dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_gateau_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gateau"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Catégorie : Burger -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/cat_burger"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_burger_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Burger"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Catégorie : Pâtes -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/cat_pates"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icone_pates_cat" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pâtes"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,10 @@ import androidx.room.*
 interface RecetteDAO {
     @Insert suspend fun sauvegarderRecette(recette: Recette): Long
     @Insert suspend fun sauvegarderListeEtapes(etapes: List<Etape>)
+    @Query("SELECT * FROM Recette")
+    suspend fun toutRecuperer(): List<Recette>
+    @Query("DELETE FROM Recette")
+    fun supprimerToutesLesRecettes()
 
 
     @Transaction
