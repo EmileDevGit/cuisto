@@ -324,6 +324,7 @@
                 android:layout_marginEnd="16dp">
 
                 <ImageView
+                    android:id="@+id/cat_pizza"
                     android:layout_width="60dp"
                     android:layout_height="48dp"
                     android:src="@drawable/icone_pizza_cat" />
@@ -343,6 +344,7 @@
                 android:layout_marginEnd="16dp">
 
                 <ImageView
+                    android:id="@+id/cat_salade"
                     android:layout_width="76dp"
                     android:layout_height="48dp"
                     android:src="@drawable/icone_salade_cat" />
@@ -361,6 +363,7 @@
                 android:layout_marginEnd="16dp">
 
                 <ImageView
+                    android:id="@+id/cat_tacos"
                     android:layout_width="74dp"
                     android:layout_height="48dp"
                     android:src="@drawable/icone_tacos_cat" />
@@ -380,6 +383,7 @@
                 android:layout_marginEnd="16dp">
 
                 <ImageView
+                    android:id="@+id/cat_gateau"
                     android:layout_width="78dp"
                     android:layout_height="48dp"
                     android:src="@drawable/icone_gateau_cat" />
@@ -399,6 +403,7 @@
                 android:layout_marginEnd="16dp">
 
                 <ImageView
+                    android:id="@+id/cat_burger"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/icone_burger_cat" />
@@ -417,6 +422,7 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/cat_pates"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/icone_pates_cat" />
