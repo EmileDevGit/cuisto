@@ -17,7 +17,7 @@ object MockData {
                 val patesId = db.categorieDao().insert(Categorie(nom = "Pâtes"))
 
                 db.recetteDao().insertRecetteAvecEtapes(
-                    Recette(nomRecette = "Pizza chèvre miel", image = "pizzachevremie", ingredients = "Chèvre, miel, noix", categorieId = pizzaId),
+                    Recette(nomRecette = "Pizza chèvre miel noix", image = "pizzachevremiel", ingredients = "Chèvre, miel, noix", categorieId = pizzaId),
                     listOf("Préchauffer le four", "Étaler la pâte", "Ajouter les ingrédients", "Cuire 15 min")
                 )
 

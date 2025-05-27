@@ -63,7 +63,7 @@
             android:textSize="20sp"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/bouton_arrondi_pas_cliquable"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
