@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/dragHandle"
+            android:id="@+id/poigneDrag"
             android:layout_width="22dp"
             android:layout_height="match_parent"
             android:layout_marginRight="3dp"

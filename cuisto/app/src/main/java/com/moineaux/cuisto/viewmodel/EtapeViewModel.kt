@@ -13,33 +13,33 @@ class EtapeViewModel : ViewModel() {
     private var idCompteur = 1L
 
     fun ajouterEtape() {
-        val currentList = _etapes.value.orEmpty().toMutableList()
+        val listeEtapesActuelle = _etapes.value.orEmpty().toMutableList()
 
         val nouvelleEtape = Etape(
-            id = idCompteur++,
+            id = idCompteur++, // <-- Génère un ID unique pour la gestion dans la vue, sera override par la base de données
             recetteId = 0,
-            ordre = currentList.size,
+            ordre = listeEtapesActuelle.size,
             description = ""
         )
 
-        currentList.add(nouvelleEtape)
-        _etapes.value = currentList
+        listeEtapesActuelle.add(nouvelleEtape)
+        _etapes.value = listeEtapesActuelle
     }
 
     fun supprimerEtape(position: Int) {
-        val currentList = _etapes.value.orEmpty().toMutableList()
-        if (position in currentList.indices) {
-            currentList.removeAt(position)
-            _etapes.value = currentList
+        val listeEtapesActuelle = _etapes.value.orEmpty().toMutableList()
+        if (position in listeEtapesActuelle.indices) {
+            listeEtapesActuelle.removeAt(position)
+            _etapes.value = listeEtapesActuelle
         }
     }
 
-    fun deplacerEtape(fromPosition: Int, toPosition: Int) {
-        val currentList = _etapes.value.orEmpty().toMutableList()
-        if (fromPosition in currentList.indices && toPosition in currentList.indices) {
-            val item = currentList.removeAt(fromPosition)
-            currentList.add(toPosition, item)
-            _etapes.value = currentList
+    fun deplacerEtape(positionInitiale: Int, positionFinale: Int) {
+        val listeEtapesActuelle = _etapes.value.orEmpty().toMutableList()
+        if (positionInitiale in listeEtapesActuelle.indices && positionFinale in listeEtapesActuelle.indices) {
+            val item = listeEtapesActuelle.removeAt(positionInitiale)
+            listeEtapesActuelle.add(positionFinale, item)
+            _etapes.value = listeEtapesActuelle
         }
     }
 }

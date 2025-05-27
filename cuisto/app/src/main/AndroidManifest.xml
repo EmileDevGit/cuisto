@@ -17,14 +17,26 @@
 
         <!-- INTRODUCTION → PREMIÈRE PAGE AFFICHÉE -->
         <activity
-            android:name=".ui.AfficherRecetteDetail"
-            android:exported="false" />
+            android:name=".ui.AfficherRecetteDetailActivity"
+            android:exported="false" >
 
+        </activity>
+
+
+        <activity
             android:name=".ui.IntroActivity"
+            android:exported="true" >
+                        <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>
+        </activity>
+
         <activity
             android:name=".ui.AjouterRecetteActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize|stateHidden">
+
         </activity>
         <activity
             android:name=".ui.MainActivity"
@@ -36,8 +48,11 @@
         </activity>
 
         <!-- Autres écrans -->
-        <activity android:name=".ui.AccueilActivity" android:exported="false" />
+        <activity android:name=".ui.AccueilActivity" android:exported="false">
 
+
+
+        </activity>
 
     </application>
 

@@ -17,56 +17,59 @@ import com.moineaux.cuisto.R
 import com.moineaux.cuisto.data.Etape
 
 class EtapeAdapter(
-    private val onEtapeDelete: (position: Int) -> Unit,
+    private val onRetirerEtape: (position: Int) -> Unit,
     private val dragStartListener: OnStartDragListener
 ) : ListAdapter<Etape, EtapeAdapter.EtapeViewHolder>(EtapeDiffCallback()) {
 
-    private val currentTexts = mutableMapOf<Long, String>()
+    private val mapEtapesActuelles = mutableMapOf<Long, String>()
 
+    // Classe contenant les éléments d'une étape (une ligne de le RecyclerView)
     inner class EtapeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tietEtape: TextInputEditText = itemView.findViewById(R.id.tietEtape)
         val btnRetirerEtape: ImageButton = itemView.findViewById(R.id.buttonRetirerEtape)
-        val handleDrag: ImageView = itemView.findViewById(R.id.dragHandle)
+        val poigneDrag: ImageView = itemView.findViewById(R.id.poigneDrag)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EtapeViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_etape, parent, false)
         return EtapeViewHolder(view)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+
+    @SuppressLint("ClickableViewAccessibility") // <-- Supprime le warning inutile
     override fun onBindViewHolder(holder: EtapeViewHolder, position: Int) {
-        val etape = getItem(position)
-        val editText = holder.tietEtape
-        editText.hint = "Étape ${position + 1}"
+        val etape = getItem(position) // <-- Récupère l'étape à afficher
+        val editTextEtape = holder.tietEtape // <-- Récupère le champ d'édition
+        editTextEtape.hint = "Étape ${position + 1}"
 
-        (editText.tag as? TextWatcher)?.let { editText.removeTextChangedListener(it) }
+        (editTextEtape.tag as? TextWatcher)?.let { editTextEtape.removeTextChangedListener(it) } // <-- Supprime le TextWatcher précédent pour éviter les problèmes de synchronisation
 
-        val currentText = currentTexts[etape.id] ?: etape.description
-        editText.setText(currentText)
+        val descriptionActuelle = mapEtapesActuelles[etape.id] ?: etape.description
+        editTextEtape.setText(descriptionActuelle)
 
+        // Bloc du TextWatcher pour synchroniser les données avec la map avec l'ID de l'étape
         val watcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                currentTexts[etape.id] = s?.toString() ?: ""
+                mapEtapesActuelles[etape.id] = s?.toString() ?: ""
             }
             override fun afterTextChanged(s: Editable?) {}
         }
+        // Fin du bloc
 
-        editText.addTextChangedListener(watcher)
-        editText.tag = watcher
+        editTextEtape.addTextChangedListener(watcher) // <-- Ajoute le TextWatcher au champ d'édition
+        editTextEtape.tag = watcher // <-- Stocke le TextWatcher dans le tag du champ d'édition pour le retirer plus tard
 
         holder.btnRetirerEtape.setOnClickListener {
             val pos = holder.bindingAdapterPosition
             if (pos != RecyclerView.NO_POSITION) {
-                val id = getItem(pos).id
-                onEtapeDelete(pos)
-                currentTexts.remove(id)
+                val id = getItem(pos).id // <-- Récupère l'ID de l'étape à retirer
+                onRetirerEtape(pos)
+                mapEtapesActuelles.remove(id)
             }
         }
 
-        holder.handleDrag.setOnTouchListener { _, event ->
+        holder.poigneDrag.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 dragStartListener.onStartDrag(holder)
                 true
@@ -76,21 +79,23 @@ class EtapeAdapter(
 
     fun getCurrentDescriptions(): List<String> {
         return currentList.map { etape ->
-            currentTexts[etape.id] ?: etape.description
+            mapEtapesActuelles[etape.id] ?: etape.description
         }
     }
+
 }
 
+// Classe permettant de comparer les items de la liste
 class EtapeDiffCallback : DiffUtil.ItemCallback<Etape>() {
-    override fun areItemsTheSame(oldItem: Etape, newItem: Etape): Boolean {
-        return oldItem.id == newItem.id
+    override fun areItemsTheSame(ancienneEtape: Etape, nouvelleEtape: Etape): Boolean {
+        return ancienneEtape.id == nouvelleEtape.id
     }
-
-    override fun areContentsTheSame(oldItem: Etape, newItem: Etape): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(ancienneEtapeDescription: Etape, nouvelleEtapeDescription: Etape): Boolean {
+        return ancienneEtapeDescription == nouvelleEtapeDescription
     }
 }
 
+// Interface permettant de démarrer le drag n drop
 interface OnStartDragListener {
     fun onStartDrag(viewHolder: RecyclerView.ViewHolder)
 }
