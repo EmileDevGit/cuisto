@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.moineaux.cuisto.R
 
 class RecettesParCategorie : AppCompatActivity() {
@@ -12,9 +13,19 @@ class RecettesParCategorie : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recettes_par_categorie)
 
+//        *************** LOGO POUR REVENIR SUR LA PAGE D'ACCUEIL ************
+
+        findViewById<ImageView>(R.id.logo_cuisto).setOnClickListener {
+            val intent = Intent(this, AccueilActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish()
+        }
+
         // On recupere le nom de la categorie passe
-        val nomCategorie = intent.getStringExtra("categorie") ?: "Inconnue"
-        findViewById<TextView>(R.id.texte_categorie).text = "CATEGORIE / $nomCategorie"
+        //Pas Besoin d'afficher le nom de la categorie
+//        val nomCategorie = intent.getStringExtra("categorie") ?: "Inconnue"
+//        findViewById<TextView>(R.id.texte_categorie).text = "CATEGORIE / $nomCategorie"
         // CLIC SUR CATEGORIE PIZZA
         findViewById<ImageView>(R.id.cat_pizza).setOnClickListener {
             ouvrirCategorie("Pizza")
@@ -41,11 +52,31 @@ class RecettesParCategorie : AppCompatActivity() {
         findViewById<ImageView>(R.id.cat_pates).setOnClickListener {
             ouvrirCategorie("Pates")
         }
+
+        // ****** Affichage du GIF SWIPE
+        val gifImageView = findViewById<ImageView>(R.id.gif_cuisto)
+
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.swipe)
+            .into(gifImageView)
+
+//        ************ Insertion categorie dynamiquement ****************
+
+        val nomCategorie = intent.getStringExtra("categorie") ?: "Inconnue"
+        val texteCategorie = findViewById<TextView>(R.id.texte_categorie)
+        texteCategorie.text =  "$nomCategorie"
+
+
     }
     private fun ouvrirCategorie(nomCategorie: String) {
-        val intent = Intent(this, RecettesParCategorie::class.java)
-        intent.putExtra("categorie", nomCategorie)
-        startActivity(intent)
+        val categorieActuelle = intent.getStringExtra("categorie")
+        if (categorieActuelle != nomCategorie) {
+            val intent = Intent(this, RecettesParCategorie::class.java)
+            intent.putExtra("categorie", nomCategorie)
+            startActivity(intent)
+            finish()
+        }
     }
 
 

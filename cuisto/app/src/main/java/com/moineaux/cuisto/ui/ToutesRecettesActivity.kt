@@ -18,6 +18,15 @@ class ToutesRecettesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_toutes_recettes)
 
+        //        *************** LOGO POUR REVENIR SUR LA PAGE D'ACCUEIL ************
+
+        findViewById<ImageView>(R.id.logo_cuisto).setOnClickListener {
+            val intent = Intent(this, AccueilActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish()
+        }
+
         // ****************** PERMET DAVOIR DEUX COULEUR SUR LE TEXTE ***************
 
         val texteCategorie = findViewById<TextView>(R.id.texte_categorie)
@@ -58,6 +67,8 @@ class ToutesRecettesActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.cat_pates).setOnClickListener {
             ouvrirCategorie("Pates")
         }
+
+
     }
     private fun ouvrirCategorie(nomCategorie: String) {
         val intent = Intent(this, RecettesParCategorie::class.java)

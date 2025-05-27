@@ -56,14 +56,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_recettes"
+            android:id="@+id/texte_categorie"
             android:layout_width="190dp"
             android:layout_height="48dp"
-            android:text="Pizza 😋"
+            android:text="CATEGORIE /"
             android:textSize="20sp"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="80dp"
             android:background="@drawable/bouton_arrondi_pas_cliquable"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
@@ -83,22 +83,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="-20dp"
+            android:layout_marginTop="20dp"
             android:padding="16dp">
 
             <!-- 1 blec de recette par categorie -->
-            <TextView
-                android:id="@+id/texte_categorie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CATEGORIE / Pizza"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#333333"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="12dp" />
 
             <HorizontalScrollView
+                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="none">
@@ -112,8 +103,9 @@
 
                     <!-- Plat 1 -->
                     <FrameLayout
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
+                        android:layout_width="400dp"
+                        android:layout_height="380dp"
+                        android:layout_gravity="center"
                         android:layout_marginEnd="16dp">
 
                         <ImageView
@@ -135,9 +127,11 @@
                     </FrameLayout>
 
                     <!-- Plat 2 -->
+
                     <FrameLayout
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
+                        android:layout_width="400dp"
+                        android:layout_height="380dp"
+                        android:layout_gravity="center"
                         android:layout_marginEnd="16dp">
 
                         <ImageView
@@ -159,8 +153,9 @@
                     </FrameLayout>
                     <!-- Plat 3 -->
                     <FrameLayout
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
+                        android:layout_width="400dp"
+                        android:layout_height="380dp"
+                        android:layout_gravity="center"
                         android:layout_marginEnd="16dp">
 
                         <ImageView
@@ -182,8 +177,9 @@
                     </FrameLayout>
                     <!-- Plat 4 -->
                     <FrameLayout
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
+                        android:layout_width="400dp"
+                        android:layout_height="380dp"
+                        android:layout_gravity="center"
                         android:layout_marginEnd="16dp">
 
                         <ImageView
@@ -207,130 +203,23 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <!-- 2eme blec de recette par categorie -->
-
-            <TextView
-                android:id="@+id/texte_categorie2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CATEGORIE / Pizza"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#333333"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="12dp" />
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp">
-
-                    <!-- Plat 1 -->
-                    <FrameLayout
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="16dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/pizzachevremiel" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:background="#AA000000"
-                            android:text="Pizza chèvre miel"
-                            android:textColor="@android:color/white"
-                            android:padding="8dp"
-                            android:textStyle="bold"
-                            android:textSize="14sp" />
-                    </FrameLayout>
-
-                    <!-- Plat 2 -->
-                    <FrameLayout
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="16dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/burgersteakfromage" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:background="#AA000000"
-                            android:text="Burger steak fromage"
-                            android:textColor="@android:color/white"
-                            android:padding="8dp"
-                            android:textStyle="bold"
-                            android:textSize="14sp" />
-                    </FrameLayout>
-                    <!-- Plat 3 -->
-                    <FrameLayout
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="16dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/burgersteakfromage" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:background="#AA000000"
-                            android:text="Burger steak fromage"
-                            android:textColor="@android:color/white"
-                            android:padding="8dp"
-                            android:textStyle="bold"
-                            android:textSize="14sp" />
-                    </FrameLayout>
-                    <!-- Plat 4 -->
-                    <FrameLayout
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="16dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/burgersteakfromage" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:background="#AA000000"
-                            android:text="Burger steak fromage"
-                            android:textColor="@android:color/white"
-                            android:padding="8dp"
-                            android:textStyle="bold"
-                            android:textSize="14sp" />
-                    </FrameLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
+<!--            ************** Mise en place du GIF SWIPE ***************-->
+            <ImageView
+                android:id="@+id/gif_cuisto"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintTop_toBottomOf="@id/scroll_recettes"
+                app:layout_constraintBottom_toTopOf="@id/barre_categories"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </LinearLayout>
     </ScrollView>
+
+
 
     <!-- Barre des catégories -->
     <HorizontalScrollView
