@@ -32,7 +32,7 @@ class AfficherRecetteDetailViewModel: ViewModel() {
             0,
             "Salade de quinoa",
             "saladequinoa",
-            "quinoa, concombre, jus de citron",
+            "quinoa, concombre jus de citron",
             1
         )
         val listEtapes : List<Etape> = listOf(
