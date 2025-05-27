@@ -11,8 +11,9 @@
         android:id="@+id/btnAjouteRecetteDetail"
         android:layout_width="61dp"
         android:layout_height="56dp"
-        android:backgroundTint="#FEA95B"
+        android:background="@drawable/bouton_arrondi"
         android:text="+"
+        android:textColor="@color/blanc"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etRechercheRecetteDetail"
@@ -91,6 +92,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvIngredientsRecetteDetail" />
 
@@ -101,6 +103,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
+        app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
