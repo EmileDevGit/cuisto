@@ -14,6 +14,7 @@ class IntroActivity : AppCompatActivity() {
 
         val boutonDecouvrir = findViewById<Button>(R.id.bouton_decouvrir)
         boutonDecouvrir.setOnClickListener {
+
             val intention = Intent(this, AccueilActivity::class.java)
             startActivity(intention)
             finish()
