@@ -40,6 +40,8 @@
                 android:background="@drawable/fond_champ_recherche"
                 android:drawableStart="@android:drawable/ic_menu_search"
                 android:hint="Recherche une recette ..."
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
                 android:padding="12dp"
                 android:textColorHint="#999999"
                 android:textSize="14sp" />

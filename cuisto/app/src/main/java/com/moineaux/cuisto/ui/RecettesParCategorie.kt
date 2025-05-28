@@ -2,6 +2,9 @@ package com.moineaux.cuisto.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +15,27 @@ class RecettesParCategorie : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recettes_par_categorie)
+
+        val barreRecherche: EditText = findViewById(R.id.champ_recherche)
+        barreRecherche.setOnEditorActionListener { v, idAction, evenement ->
+            // Verifier si la touche entree est tape ou meme pour le clavier virtuel
+            if (idAction == EditorInfo.IME_ACTION_SEARCH ||
+                idAction == EditorInfo.IME_ACTION_DONE ||
+                (evenement != null && evenement.keyCode == KeyEvent.KEYCODE_ENTER && evenement.action == KeyEvent.ACTION_DOWN)) {
+
+                val itemRechercher = barreRecherche.text.toString()
+                val intention = Intent(this, ToutesRecettesActivity::class.java)
+                intention.putExtra("itemRechercher", itemRechercher)
+                startActivity(intention)
+
+                // Cacher clavier virtuel
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+
+                return@setOnEditorActionListener true // Consommer l evenement
+            }
+            return@setOnEditorActionListener false // laisser le system avec les autres actions
+        }
 
 //        *************** LOGO POUR REVENIR SUR LA PAGE D'ACCUEIL ************
 

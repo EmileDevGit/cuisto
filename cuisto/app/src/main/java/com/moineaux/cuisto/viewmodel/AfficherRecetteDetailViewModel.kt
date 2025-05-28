@@ -1,12 +1,16 @@
 package com.moineaux.cuisto.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.moineaux.cuisto.data.AppDatabase
 import com.moineaux.cuisto.data.Etape
-import com.moineaux.cuisto.data.Recette
+import kotlinx.coroutines.launch
 
-class AfficherRecetteDetailViewModel: ViewModel() {
+class AfficherRecetteDetailViewModel(application: Application): AndroidViewModel(application) {
+
     private val _ingredients = MutableLiveData<String>()
     val ingredientsRecetteDetail : LiveData<String> = _ingredients
 
@@ -22,25 +26,20 @@ class AfficherRecetteDetailViewModel: ViewModel() {
     private val _imageUri = MutableLiveData<String>()
     val imageUri: LiveData<String> = _imageUri
 
-    fun afficherRecette(//idRecette: Int
-    ) {
+    private val recetteDao = AppDatabase.getDatabase(application).recetteDao()
+    private val categorieDAO = AppDatabase.getDatabase(application).categorieDao()
+    private val etapeDAO = AppDatabase.getDatabase(application).etapeDao()
+
+    fun afficherRecette(idRecette: Long) = viewModelScope.launch {
         // Fonction qui cherche la recette dans bd
-        val recette: Recette = Recette(
-            0,
-            "Salade de quinoa",
-            "saladequinoa",
-            "200g de quinoa, 1 concombre, jus de citron",
-            1
-        )
-        val listEtapes : List<Etape> = listOf(
-            Etape(0, 0, 1, "Cuire le quinoa et laisser refroidir."),
-            Etape(0, 0, 2, "Couper le concombre en dés."),
-            Etape(0, 0, 3, "Mélanger le quinoa, le concombre et assaisonner avec le jus de citron, sel et poivre.")
-        )
+        val recette = recetteDao.recupererRecetteAvecId(idRecette)
+        val categorie = categorieDAO.getCategorieAvecId(recette.categorieId)
+        val listEtapes = etapeDAO.recupererlisteEtapesAvecId(idRecette)
+
 
         _etapes.value = listEtapes
         _nomRecette.value = recette.nomRecette
-        _categorieRecette.value = "Salade" // recuperer a partir du bd
+        _categorieRecette.value = categorie.nom
         _ingredients.value = recette.ingredients
         _imageUri.value = recette.image
     }

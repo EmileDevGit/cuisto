@@ -7,6 +7,8 @@ interface CategorieDAO {
     @Insert suspend fun sauvegarderCategorie(categorie: Categorie): Long
     @Insert suspend fun insert(categorie: Categorie): Long
     @Query("DELETE FROM Categorie") fun supprimerToutesLesCategories()
+    @Query("SELECT * FROM Categorie WHERE id = :categorieId")
+    suspend fun getCategorieAvecId(categorieId: Long): Categorie
 
     // **************  PERMET DE VERIFIER SI LA CATEGORIE EXISTE ***************
 

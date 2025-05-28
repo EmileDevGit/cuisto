@@ -10,20 +10,26 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.util.Log
 import android.widget.Button
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.moineaux.cuisto.R
 import com.moineaux.cuisto.data.AppDatabase
 import com.moineaux.cuisto.data.MockData
+import com.moineaux.cuisto.data.Recette
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ToutesRecettesActivity : AppCompatActivity() {
+    var filtre: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -40,7 +46,32 @@ class ToutesRecettesActivity : AppCompatActivity() {
 //        }.start()
 
 
+        val barreRecherche: EditText = findViewById(R.id.champ_recherche)
+        barreRecherche.setOnEditorActionListener { v, idAction, evenement ->
+            // Verifier si la touche entree est tape ou meme pour le clavier virtuel
+            if (idAction == EditorInfo.IME_ACTION_SEARCH ||
+                idAction == EditorInfo.IME_ACTION_DONE ||
+                (evenement != null && evenement.keyCode == KeyEvent.KEYCODE_ENTER && evenement.action == KeyEvent.ACTION_DOWN)) {
 
+                val itemRechercher = barreRecherche.text.toString()
+                val intention = Intent(this, ToutesRecettesActivity::class.java)
+                intention.putExtra("itemRechercher", itemRechercher)
+                startActivity(intention)
+
+                // Cacher clavier virtuel
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+
+                return@setOnEditorActionListener true // Consommer l evenement
+            }
+            return@setOnEditorActionListener false // laisser le system avec les autres actions
+        }
+
+        // Gérez la requête de recherche reçue de l'AccueilActivity ou autre
+        val elementRechercheDepuisIntent = intent.getStringExtra("itemRechercher")
+        if (!elementRechercheDepuisIntent.isNullOrBlank()) {
+            filtre = elementRechercheDepuisIntent
+        }
 
 
         val layoutPrincipal = findViewById<LinearLayout>(R.id.scroll_layout)
@@ -52,6 +83,18 @@ class ToutesRecettesActivity : AppCompatActivity() {
             var recettes = withContext(Dispatchers.IO) {
                 db.recetteDao().toutRecuperer()
             }
+
+            if (filtre.isNotEmpty()) {
+                recettes = recettes.filter { it.nomRecette.contains(filtre, ignoreCase = true) }
+            } else if (intent.getStringExtra("itemRechercher").isNullOrEmpty()) {
+                val filtreAvecIntent = intent.getStringExtra("itemRechercher")
+                recettes = recettes.filter { it.nomRecette.contains(filtreAvecIntent.toString(), ignoreCase = true) }
+            }
+
+            if (recettes.isEmpty()) {
+                Toast.makeText(this@ToutesRecettesActivity, "Aucun recette trouvé", Toast.LENGTH_LONG).show()
+            }
+
 
             //  ***************** Regroupe les recettes selon leur categorieId ************
             val recettesParCategorie = recettes.groupBy { it.categorieId }
@@ -76,6 +119,12 @@ class ToutesRecettesActivity : AppCompatActivity() {
 
                     val image = carte.findViewById<ImageView>(R.id.image_recette)
                     val nom = carte.findViewById<TextView>(R.id.nom_recette)
+
+                    image.setOnClickListener {
+                        val intention = Intent(this@ToutesRecettesActivity, AfficherRecetteDetailActivity::class.java)
+                        intention.putExtra("recetteid", recette.id)
+                        startActivity(intention)
+                    }
 
                     val resId = resources.getIdentifier(recette.image, "drawable", packageName)
                     Log.d("IMAGE_TEST", "Nom image : ${recette.image}, resId = $resId")

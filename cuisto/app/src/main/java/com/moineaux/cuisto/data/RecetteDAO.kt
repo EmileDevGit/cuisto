@@ -11,6 +11,13 @@ interface RecetteDAO {
     @Query("SELECT * FROM Recette")
     suspend fun toutRecuperer(): List<Recette>
 
+    @Query("SELECT * FROM Recette WHERE id = :idRecette")
+    suspend fun recupererRecetteAvecId(idRecette: Long): Recette
+
+    @Query("SELECT * FROM Recette WHERE nomRecette  = :nomDuRecette")
+    suspend fun recupererRecetteAvecNom(nomDuRecette: String?): List<Recette>
+
+
     @Query("DELETE FROM Recette")
     fun supprimerToutesLesRecettes()
 

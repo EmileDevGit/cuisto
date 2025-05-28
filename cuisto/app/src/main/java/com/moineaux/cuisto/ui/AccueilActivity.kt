@@ -3,7 +3,9 @@ package com.moineaux.cuisto.ui
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.widget.Button
+import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,11 +15,33 @@ import com.moineaux.cuisto.R
 import com.moineaux.cuisto.data.AppDatabase
 import com.moineaux.cuisto.data.MockData
 import kotlinx.coroutines.launch
+import android.view.inputmethod.EditorInfo
 
 class AccueilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_accueil)
+
+        val barreRecherche: EditText = findViewById(R.id.champ_recherche)
+        barreRecherche.setOnEditorActionListener { v, idAction, evenement ->
+            // Verifier si la touche entree est tape ou meme pour le clavier virtuel
+            if (idAction == EditorInfo.IME_ACTION_SEARCH ||
+                idAction == EditorInfo.IME_ACTION_DONE ||
+                (evenement != null && evenement.keyCode == KeyEvent.KEYCODE_ENTER && evenement.action == KeyEvent.ACTION_DOWN)) {
+
+                val itemRechercher = barreRecherche.text.toString()
+                val intention = Intent(this, ToutesRecettesActivity::class.java)
+                intention.putExtra("itemRechercher", itemRechercher)
+                startActivity(intention)
+
+                // Cacher clavier virtuel
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+
+                return@setOnEditorActionListener true // Consommer l evenement
+            }
+            return@setOnEditorActionListener false // laisser le system avec les autres actions
+        }
 
         // Mock
         val db = AppDatabase.getDatabase(this)
@@ -127,7 +151,9 @@ class AccueilActivity : AppCompatActivity() {
                 grilleRecettes.addView(frame)
 
                 imageView.setOnClickListener {
-
+                    val intention = Intent(this@AccueilActivity, AfficherRecetteDetailActivity::class.java)
+                    intention.putExtra("recetteid", recette.id)
+                    startActivity(intention)
                 }
             }
         }
