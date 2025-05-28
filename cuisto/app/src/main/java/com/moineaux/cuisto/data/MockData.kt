@@ -18,22 +18,42 @@ object MockData {
 
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(nomRecette = "Pizza chèvre miel noix", image = "pizzachevremiel", ingredients = "Chèvre, miel, noix", categorieId = pizzaId,isMock = 1),
-                    listOf("Préchauffer le four", "Étaler la pâte", "Ajouter les ingrédients", "Cuire 15 min")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four"),
+                        Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte"),
+                        Etape(recetteId = 1, ordre = 3, description ="Ajouter les ingrédients"),
+                        Etape(recetteId = 1, ordre = 4, description = "Cuire 15 min")
+                    )
                 )
 
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(nomRecette = "Salade de quinoa", image = "saladequinoa", ingredients = "Quinoa, légumes", categorieId = saladeId,isMock = 1),
-                    listOf("Cuire le quinoa", "Couper les légumes", "Mélanger", "Assaisonner")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four"),
+                        Etape(recetteId = 1, ordre = 2, description = "Couper les légumes"),
+                        Etape(recetteId = 1, ordre = 3, description = "Mélanger"),
+                        Etape(recetteId = 1, ordre = 4, description = "Assaisonner")
+                    )
                 )
 
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(nomRecette = "Burger steak fromage", image = "burgersteakfromage", ingredients = "Steak, fromage, pain", categorieId = burgerId,isMock = 1),
-                    listOf("Cuire le steak", "Griller le pain", "Monter le burger", "Servir chaud")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Cuire le steak"),
+                        Etape(recetteId = 1, ordre = 2, description = "Griller le pain"),
+                        Etape(recetteId = 1, ordre = 3, description = "Monter le burger"),
+                        Etape(recetteId = 1, ordre = 4, description = "Servir chaud")
+                    )
                 )
 
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(nomRecette = "Pâtes aux champignons", image = "pateschampignons", ingredients = "Pâtes, champignons, crème", categorieId = patesId,isMock = 1),
-                    listOf("Faire cuire les pâtes", "Sauter les champignons", "Ajouter la crème", "Mélanger le tout")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Faire cuire les pâtes"),
+                        Etape(recetteId = 1, ordre = 2, description ="Sauter les champignons"),
+                        Etape(recetteId = 1, ordre = 3, description = "Ajouter la crème"),
+                        Etape(recetteId = 1, ordre = 4, description = "Mélanger le tout")
+                    )
                 )
 
 
@@ -55,7 +75,12 @@ object MockData {
                         categorieId = pizzaId,
                         isMock = 0
                     ),
-                    listOf("Préchauffer le four à 220°C.", "Étaler la pâte.", "Étaler la sauce tomate, la mozzarella et le basilic.", "Cuire 10-15 minutes.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four à 200°C."),
+                        Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte."),
+                        Etape(recetteId = 1, ordre = 3, description = "Étaler la sauce tomate et la mozzarella."),
+                        Etape(recetteId = 1, ordre = 4, description = "Cuire 10-15 minutes.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -65,7 +90,12 @@ object MockData {
                         categorieId = pizzaId,
                         isMock = 0
                     ),
-                    listOf("Préchauffer le four à 220°C.", "Étaler la pâte.", "Étaler la sauce tomate, le jambon, les champignons et la mozzarella.", "Cuire 10-15 minutes.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four à 200°C."),
+                        Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte."),
+                        Etape(recetteId = 1, ordre = 3, description = "Étaler la sauce tomate, le jambon, les champignons et la mozzarella."),
+                        Etape(recetteId = 1, ordre = 4, description = "Cuire 10-15 minutes.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -75,7 +105,12 @@ object MockData {
                         categorieId = pizzaId,
                         isMock = 0
                     ),
-                    listOf("Préchauffer le four à 220°C.", "Étaler la pâte.", "Étaler la sauce tomate et les 4 fromages.", "Cuire 10-15 minutes.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four à 200°C."),
+                        Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte."),
+                        Etape(recetteId = 1, ordre = 3, description = "Étaler la sauce tomate, les fromages."),
+                        Etape(recetteId = 1, ordre = 4, description = "Cuire 10-15 minutes.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -85,7 +120,12 @@ object MockData {
                         categorieId = pizzaId,
                         isMock = 0
                     ),
-                    listOf("Préchauffer le four à 220°C.", "Étaler la pâte.", "Étaler la sauce tomate et les légumes.", "Cuire 10-15 minutes.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four à 200°C."),
+                        Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte."),
+                        Etape(recetteId = 1, ordre = 3, description = "Étaler la sauce tomate, les légumes et la mozzarella."),
+                        Etape(recetteId = 1, ordre = 4, description = "Cuire 10-15 minutes.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -95,7 +135,12 @@ object MockData {
                         categorieId = pizzaId,
                         isMock = 0
                     ),
-                    listOf("Préchauffer le four à 220°C.", "Étaler la pâte.", "Étaler la sauce tomate, le pepperoni et la mozzarella.", "Cuire 10-15 minutes.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four à 200°C."),
+                        Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte."),
+                        Etape(recetteId = 1, ordre = 3, description = "Étaler la sauce tomate, le pepperoni et la mozzarella."),
+                        Etape(recetteId = 1, ordre = 4, description = "Cuire 10-15 minutes.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -105,7 +150,12 @@ object MockData {
                         categorieId = pizzaId,
                         isMock = 0
                     ),
-                    listOf("Préchauffer le four à 200°C.", "Étaler la pâte en cercle.", "Garnir la moitié de la pâte.", "Replier la pâte et souder les bords.", "Cuire 15-20 minutes.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four à 200°C."),
+                        Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte."),
+                        Etape(recetteId = 1, ordre = 3, description = "Étaler la sauce tomate, le jambon, les champignons et la mozzarella."),
+                        Etape(recetteId = 1, ordre = 4, description = "Ajouter l'œuf et cuire 10-15 minutes.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -115,7 +165,12 @@ object MockData {
                         categorieId = pizzaId,
                         isMock = 0
                     ),
-                    listOf("Préchauffer le four à 220°C.", "Étaler la pâte.", "Étaler la sauce tomate, le jambon, l'ananas et la mozzarella.", "Cuire 10-15 minutes.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four à 200°C."),
+                        Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte."),
+                        Etape(recetteId = 1, ordre = 3, description = "Étaler la sauce tomate, le jambon, les ananas et la mozzarella."),
+                        Etape(recetteId = 1, ordre = 4, description = "Cuire 10-15 minutes.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -125,7 +180,12 @@ object MockData {
                         categorieId = pizzaId,
                         isMock = 0
                     ),
-                    listOf("Préchauffer le four à 220°C.", "Étaler la pâte.", "Étaler la sauce tomate, le thon, les oignons, les olives et la mozzarella.", "Cuire 10-15 minutes.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four à 200°C."),
+                        Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte."),
+                        Etape(recetteId = 1, ordre = 3, description = "Étaler la sauce tomate, le thon, les oignons, les olives et la mozzarella."),
+                        Etape(recetteId = 1, ordre = 4, description = "Cuire 10-15 minutes.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -135,7 +195,12 @@ object MockData {
                         categorieId = pizzaId,
                         isMock = 0
                     ),
-                    listOf("Préchauffer le four à 220°C.", "Étaler la pâte.", "Étaler la crème fraîche, le chèvre, le miel et les noix.", "Cuire 10-15 minutes.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four à 200°C."),
+                        Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte."),
+                        Etape(recetteId = 1, ordre = 3, description = "Étaler la crème fraîche, le chèvre, le miel et les noix."),
+                        Etape(recetteId = 1, ordre = 4, description = "Cuire 10-15 minutes.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -145,7 +210,12 @@ object MockData {
                         categorieId = pizzaId,
                         isMock = 0
                     ),
-                    listOf("Préchauffer le four à 220°C.", "Étaler la pâte.", "Étaler la sauce bolognaise, les oignons et la mozzarella.", "Cuire 10-15 minutes.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four à 200°C."),
+                        Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte."),
+                        Etape(recetteId = 1, ordre = 3, description = "Étaler la sauce bolognaise, les oignons et la mozzarella."),
+                        Etape(recetteId = 1, ordre = 4, description = "Cuire 10-15 minutes.")
+                    )
                 )
 
                 // ***************** SALADE ***************
@@ -158,7 +228,12 @@ object MockData {
                         categorieId = saladeId,
                         isMock = 0
                     ),
-                    listOf("Laver et couper la laitue.", "Faire griller le poulet et le couper en dés.", "Préparer les croûtons.", "Mélanger tous les ingrédients avec la sauce César.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Laver et couper la laitue."),
+                        Etape(recetteId = 1, ordre = 2, description =   "Faire griller le poulet et le couper en dés."),
+                        Etape(recetteId = 1, ordre = 3, description = "Préparer les croûtons."),
+                        Etape(recetteId = 1, ordre = 4, description = "Mélanger tous les ingrédients avec la sauce César.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -168,7 +243,16 @@ object MockData {
                         categorieId = saladeId,
                         isMock = 0
                     ),
-                    listOf("Cuire les haricots verts, les pommes de terre et les œufs.", "Couper les légumes et les œufs.", "Disposer tous les ingrédients.", "Arroser de vinaigrette.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Cuire les haricots verts"),
+                        Etape(recetteId = 1, ordre = 2, description = "Couper les légumes en dés."),
+                        Etape(recetteId = 1, ordre = 3, description = "Mélanger tous les ingrédients."),
+                        Etape(recetteId = 1, ordre = 4, description ="les pommes de terre et les œufs."),
+                        Etape(recetteId = 1, ordre = 5, description = "Arroser de vinaigrette."),
+                        Etape(recetteId = 1, ordre = 6, description = "Couper les légumes et les œufs."),
+                        Etape(recetteId = 1, ordre = 7, description = "Disposer tous les ingrédients."),
+                        Etape(recetteId = 1, ordre = 8, description = "Arroser de vinaigrette.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -178,7 +262,11 @@ object MockData {
                         categorieId = saladeId,
                         isMock = 0
                     ),
-                    listOf("Cuire les pâtes et les laisser refroidir.", "Couper les légumes et la feta.", "Mélanger tous les ingrédients avec la vinaigrette.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Cuire les pâtes et les laisser refroidir."),
+                        Etape(recetteId = 1, ordre = 2, description = "Couper les légumes et la feta."),
+                        Etape(recetteId = 1, ordre = 3, description = "Mélanger tous les ingrédients avec la vinaigrette.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -188,7 +276,11 @@ object MockData {
                         categorieId = saladeId,
                         isMock = 0
                     ),
-                    listOf("Couper les légumes et la feta.", "Mélanger tous les ingrédients.", "Arroser d'huile d'olive et saupoudrer d'origan.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Couper les légumes et la feta."),
+                        Etape(recetteId = 1, ordre = 2, description = "Mélanger tous les ingrédients."),
+                        Etape(recetteId = 1, ordre = 3, description = "Arroser d'huile d'olive et saupoudrer d'origan.")
+                    )
                 )
 
                 db.recetteDao().insertRecetteAvecEtapes(
@@ -199,7 +291,12 @@ object MockData {
                         categorieId = saladeId,
                         isMock = 0
                     ),
-                    listOf("Couper les tomates et la mozzarella en tranches.", "Disposer en alternance avec les feuilles de basilic.", "Arroser d'huile d'olive et de vinaigre balsamique.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Couper les tomates et la mozzarella en tranches."),
+                        Etape(recetteId = 1, ordre = 2, description = "Mélanger tous les ingrédients."),
+                        Etape(recetteId = 1, ordre = 3, description = "Disposer en alternance avec les feuilles de basilic."),
+                        Etape(recetteId = 1, ordre = 4, description = "Arroser d'huile d'olive et de vinaigre balsamique.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -209,7 +306,11 @@ object MockData {
                         categorieId = saladeId,
                         isMock = 0
                     ),
-                    listOf("Cuire les lentilles.", "Couper les légumes en petits dés.", "Mélanger les lentilles et les légumes avec la vinaigrette.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Cuire les lentilles."),
+                        Etape(recetteId = 1, ordre = 2, description = "Couper les légumes en petits dés."),
+                        Etape(recetteId = 1, ordre = 3, description = "Mélanger les lentilles et les légumes avec la vinaigrette.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -219,7 +320,11 @@ object MockData {
                         categorieId = saladeId,
                         isMock = 0
                     ),
-                    listOf("Préparer les fruits de mer (décongeler si nécessaire).", "Hacher le céleri, l'oignon et le persil.", "Mélanger tous les ingrédients avec le jus de citron et l'huile d'olive.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Préparer les fruits de mer (décongeler si nécessaire)."),
+                        Etape(recetteId = 1, ordre = 2, description = "Hacher le céleri, l'oignon et le persil."),
+                        Etape(recetteId = 1, ordre = 3, description = "Mélanger tous les ingrédients avec le jus de citron et l'huile d'olive.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -229,7 +334,12 @@ object MockData {
                         categorieId = saladeId,
                         isMock = 0
                     ),
-                    listOf("Cuire les haricots verts à la vapeur.", "Couper la feta et les tomates séchées.", "Faire griller les pignons de pin.", "Mélanger tous les ingrédients avec la vinaigrette.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Cuire les haricots verts à la vapeur."),
+                        Etape(recetteId = 1, ordre = 2, description = "Couper la feta et les tomates séchées."),
+                        Etape(recetteId = 1, ordre = 3, description = "Faire griller les pignons de pin."),
+                        Etape(recetteId = 1, ordre = 4, description = "Mélanger tous les ingrédients avec la vinaigrette.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -239,7 +349,11 @@ object MockData {
                         categorieId = saladeId,
                         isMock = 0
                     ),
-                    listOf("Couper le poulet et l'avocat en dés.", "Hacher l'oignon rouge et la coriandre.", "Mélanger tous les ingrédients avec le jus de lime et l'huile d'olive.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Couper le poulet et l'avocat en dés."),
+                        Etape(recetteId = 1, ordre = 2, description = "Hacher l'oignon rouge et la coriandre."),
+                        Etape(recetteId = 1, ordre = 3, description = "Mélanger tous les ingrédients avec le jus de lime et l'huile d'olive.")
+                    )
                 )
 
                 // ****************** BURGER ***************
@@ -252,7 +366,11 @@ object MockData {
                         categorieId = burgerId,
                         isMock = 0
                     ),
-                    listOf("Façonner le steak et le cuire à la poêle.", "Faire griller le pain.", "Assembler le burger avec tous les ingrédients.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Façonner le steak et le cuire à la poêle."),
+                        Etape(recetteId = 1, ordre = 2, description = "Faire griller le pain."),
+                        Etape(recetteId = 1, ordre = 3, description = "Assembler le burger avec tous les ingrédients.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -262,7 +380,12 @@ object MockData {
                         categorieId = burgerId,
                         isMock = 0
                     ),
-                    listOf("Façonner le steak et le cuire avec le fromage.", "Faire griller le bacon et caraméliser l'oignon.", "Faire griller le pain.", "Assembler le burger.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Façonner le steak et le cuire avec le fromage."),
+                        Etape(recetteId = 1, ordre = 2, description = "Faire griller le bacon et caraméliser l'oignon."),
+                        Etape(recetteId = 1, ordre = 3, description = "Faire griller le pain."),
+                        Etape(recetteId = 1, ordre = 4, description = "Assembler le burger.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -272,7 +395,11 @@ object MockData {
                         categorieId = burgerId,
                         isMock = 0
                     ),
-                    listOf("Faire griller le champignon et le poivron.", "Faire griller le pain.", "Assembler le burger avec le fromage de chèvre et la roquette.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Faire griller le champignon et le poivron."),
+                        Etape(recetteId = 1, ordre = 2, description = "Faire griller le pain."),
+                        Etape(recetteId = 1, ordre = 3, description = "Assembler le burger avec le fromage de chèvre et la roquette.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -282,7 +409,12 @@ object MockData {
                         categorieId = burgerId,
                         isMock = 0
                     ),
-                    listOf("Faire frire ou cuire le filet de poulet pané.", "Préparer la salade de chou.", "Faire griller le pain.", "Assembler le burger.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Faire frire ou cuire le filet de poulet pané."),
+                        Etape(recetteId = 1, ordre = 2, description = "Préparer la salade de chou."),
+                        Etape(recetteId = 1, ordre = 3, description = "Faire griller le pain."),
+                        Etape(recetteId = 1, ordre = 4, description = "Assembler le burger.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -292,7 +424,12 @@ object MockData {
                         categorieId = burgerId,
                         isMock = 0
                     ),
-                    listOf("Façonner le steak et le cuire avec le fromage.", "Préparer le guacamole et la salsa.", "Faire griller le pain.", "Assembler le burger.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Façonner le steak et le cuire avec le fromage."),
+                        Etape(recetteId = 1, ordre = 2, description = "Préparer le guacamole et la salsa."),
+                        Etape(recetteId = 1, ordre = 3, description = "Faire griller le pain."),
+                        Etape(recetteId = 1, ordre = 4, description = "Assembler le burger.")
+                    )
                 )
 
                 // ***************** PATES ****************
@@ -305,7 +442,13 @@ object MockData {
                         categorieId = patesId,
                         isMock = 0
                     ),
-                    listOf("Faire revenir l'oignon, l'ail, les carottes et le céleri.", "Ajouter la viande hachée et cuire.", "Incorporer la sauce tomate et laisser mijoter.", "Cuire les spaghetti al dente.", "Servir la sauce sur les spaghetti.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Faire revenir l'oignon, l'ail, les carottes et le céleri."),
+                        Etape(recetteId = 1, ordre = 2, description = "Ajouter la viande hachée et cuire."),
+                        Etape(recetteId = 1, ordre = 3, description = "Incorporer la sauce tomate et laisser mijoter."),
+                        Etape(recetteId = 1, ordre = 4, description = "Cuire les spaghetti al dente."),
+                        Etape(recetteId = 1, ordre = 5, description = "Servir la sauce sur les spaghetti.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -315,7 +458,12 @@ object MockData {
                         categorieId = patesId,
                         isMock = 0
                     ),
-                    listOf("Couper le guanciale/pancetta en dés et le faire revenir.", "Battre les œufs avec le pecorino et le poivre.", "Cuire les spaghetti al dente.", "Mélanger les pâtes chaudes avec la sauce aux œufs et le guanciale.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Couper le guanciale/pancetta en dés et le faire revenir."),
+                        Etape(recetteId = 1, ordre = 2, description = "Battre les œufs avec le pecorino et le poivre."),
+                        Etape(recetteId = 1, ordre = 3, description = "Cuire les spaghetti al dente."),
+                        Etape(recetteId = 1, ordre = 4, description = "Mélanger les pâtes chaudes avec la sauce aux œufs et le guanciale.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -325,7 +473,11 @@ object MockData {
                         categorieId = patesId,
                         isMock = 0
                     ),
-                    listOf("Préparer le pesto en mixant tous les ingrédients.", "Cuire les pâtes al dente.", "Mélanger les pâtes avec le pesto.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Préparer le pesto en mixant tous les ingrédients."),
+                        Etape(recetteId = 1, ordre = 2, description = "Cuire les pâtes al dente."),
+                        Etape(recetteId = 1, ordre = 3, description = "Mélanger les pâtes avec le pesto.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -335,7 +487,12 @@ object MockData {
                         categorieId = patesId,
                         isMock = 0
                     ),
-                    listOf("Préparer la sauce bolognaise et la béchamel.", "Alterner couches de lasagnes, bolognaise et béchamel dans un plat.", "Saupoudrer de parmesan et faire gratiner au four.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Préparer la sauce bolognaise et la béchamel."),
+                        Etape(recetteId = 1, ordre = 2, description = "Faire cuire les feuilles de lasagnes."),
+                        Etape(recetteId = 1, ordre = 3, description = "Alterner couches de lasagnes, bolognaise et béchamel dans un plat."),
+                        Etape(recetteId = 1, ordre = 4, description = "Saupoudrer de parmesan et faire gratiner au four.")
+                    )
                 )
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(
@@ -345,7 +502,12 @@ object MockData {
                         categorieId = patesId,
                         isMock = 0
                     ),
-                    listOf("Cuire les macaroni al dente.", "Préparer une sauce béchamel avec le beurre, la farine et le lait.", "Incorporer le fromage à la sauce.", "Mélanger les macaroni avec la sauce au fromage.")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description="Cuire les macaroni al dente."),
+                        Etape(recetteId = 1, ordre = 2, description = "Préparer une sauce béchamel avec le beurre, la farine et le lait."),
+                        Etape(recetteId = 1, ordre = 3, description = "Incorporer le fromage à la sauce."),
+                        Etape(recetteId = 1, ordre = 4, description = "Mélanger les macaroni avec la sauce au fromage.")
+                    )
                 )
 
                 //****************** TACOS ****************
@@ -360,7 +522,11 @@ object MockData {
                         categorieId = tacosId,
                         isMock = 0
                     ),
-                    listOf("Cuire le boeuf", "Ajouter épices", "Assembler")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Cuire le boeuf"),
+                        Etape(recetteId = 1, ordre = 2, description = "Ajouter épices"),
+                        Etape(recetteId = 1, ordre = 3, description = "Assembler")
+                    )
                 )
 
                 db.recetteDao().insertRecetteAvecEtapes(
@@ -371,7 +537,11 @@ object MockData {
                         categorieId = tacosId,
                         isMock = 0
                     ),
-                    listOf("Préparer les ingrédients", "Assembler", "Servir")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Préparer les ingrédients"),
+                        Etape(recetteId = 1, ordre = 2, description = "Assembler"),
+                        Etape(recetteId = 1, ordre = 3, description = "Servir")
+                    )
                 )
 
                 db.recetteDao().insertRecetteAvecEtapes(
@@ -382,7 +552,11 @@ object MockData {
                         categorieId = tacosId,
                         isMock = 0
                     ),
-                    listOf("Cuire le poisson", "Préparer garniture", "Assembler")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Cuire le poisson"),
+                        Etape(recetteId = 1, ordre = 2, description = "Préparer garniture"),
+                        Etape(recetteId = 1, ordre = 3, description = "Assembler")
+                    )
                 )
 
                 db.recetteDao().insertRecetteAvecEtapes(
@@ -393,7 +567,11 @@ object MockData {
                         categorieId = tacosId,
                         isMock = 0
                     ),
-                    listOf("Cuire bacon", "Ajouter fromage", "Assembler")
+                    listOf(
+                        Etape(recetteId = 1, ordre = 1, description ="Cuire bacon"),
+                        Etape(recetteId = 1, ordre = 2, description = "Ajouter fromage"),
+                        Etape(recetteId = 1, ordre = 3, description = "Assembler")
+                    )
                 )
 
 

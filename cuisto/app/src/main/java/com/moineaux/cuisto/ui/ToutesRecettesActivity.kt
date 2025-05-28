@@ -47,7 +47,7 @@ class ToutesRecettesActivity : AppCompatActivity() {
         // *************************  Récupération des recettes **************************
 
         lifecycleScope.launch {
-            val recettes = withContext(Dispatchers.IO) {
+            var recettes = withContext(Dispatchers.IO) {
                 db.recetteDao().toutRecuperer()
             }
 

@@ -77,14 +77,17 @@ class AccueilActivity : AppCompatActivity() {
         intent.putExtra("categorie", nomCategorie)
         startActivity(intent)
     }
-    private fun afficherRecettes(db: AppDatabase) {
+
+    private fun afficherRecettes(db: AppDatabase, filtre: String = "") {
         val grilleRecettes = findViewById<GridLayout>(R.id.grille_recettes)
 
         // *************** Lance ce code de manière asynchrone, mais arrête-le automatiquement si l'activité est détruite (ex: quand l'utilisateur quitte l'écran) ***************
         lifecycleScope.launch {
 
 
-            val recettes = db.recetteDao().recupererRecettesMock()
+
+            var recettes = db.recetteDao().recupererRecettesMock()
+
 
             // ****************** POUR DEBUGGER + DANS LOGCAT : recherche DEBUG_RECETTES **************************
 
@@ -111,6 +114,10 @@ class AccueilActivity : AppCompatActivity() {
                 texteView.text = recette.nomRecette
 
                 grilleRecettes.addView(frame)
+
+                imageView.setOnClickListener {
+
+                }
             }
         }
     }
