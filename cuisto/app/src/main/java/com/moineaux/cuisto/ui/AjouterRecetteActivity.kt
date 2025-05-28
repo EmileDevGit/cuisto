@@ -201,6 +201,13 @@ class AjouterRecetteActivity() : AppCompatActivity() {
                 actvCategorie.text.toString()
             )
         }
+
+        ajouterRecetteViewModel.fermerActivity.observe(this) { recetteSaved ->
+            if (recetteSaved == true) {
+                finish()
+            }
+        }
+
         // Gestion messages Toast
         ajouterRecetteViewModel.message.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()

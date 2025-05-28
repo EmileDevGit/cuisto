@@ -83,6 +83,7 @@ class AfficherRecetteDetailActivity : AppCompatActivity() {
             tvCategorie.text = categorie
         }
         recetteDetailViewModel.imageUri.observe(this) { srcImage ->
+
             if (srcImage != null) {
                 // Premierement essaie de voir si c'est un drawable (Image avec l'app)
                 val idResource = resources.getIdentifier(srcImage, "drawable", packageName)

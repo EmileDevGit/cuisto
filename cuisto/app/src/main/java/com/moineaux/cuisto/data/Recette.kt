@@ -20,7 +20,7 @@ data class Recette(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val nomRecette: String,
-    val image: String,
+    val image: String?,
     val ingredients: String,
     val categorieId: Long,  //  Clé étrangère vers Categorie.id
     val isMock: Int = 0  // 0 = false, 1 = true  // Marquer les recettes fictives comme non supprimables

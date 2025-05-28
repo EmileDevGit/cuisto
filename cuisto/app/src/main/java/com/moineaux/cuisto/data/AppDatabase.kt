@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 // REMPLACER Article::class PAR LE NOM DE VOTRE CLASSE
-@Database(entities = [Recette::class, Etape::class, Categorie::class], version = 8)
+@Database(entities = [Recette::class, Etape::class, Categorie::class], version = 9)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun recetteDao(): RecetteDAO

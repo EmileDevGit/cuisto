@@ -25,6 +25,9 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
     private val _nomCategories = MutableLiveData<List<String>>()
     val categories: LiveData<List<String>> = _nomCategories
 
+    private val _fermerActivity = MutableLiveData<Boolean>(false)
+    val fermerActivity: LiveData<Boolean> get() = _fermerActivity
+
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> get() = _message
 
@@ -118,11 +121,11 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
 
 
 
-    fun enregistrerRecette(nom: String, imageUri: Uri?, ingredients: String, categorieNom: String) {
+    fun enregistrerRecette(nom: String, imageUri: Uri?, ingredients: String, categorieNom: String){
 
         // Validation des étapes
         val etapes = _etapes.value
-        if (nom.isBlank() || ingredients.isBlank() || categorieNom.isBlank() || imageUri == null) {
+        if (nom.isBlank() || ingredients.isBlank() || categorieNom.isBlank()) {
             _message.value = "Veuillez remplir tous les champs"
             return
         }
@@ -166,6 +169,7 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
             }
 
             _message.postValue("Recette enregistrée avec succès")
+            _fermerActivity.postValue(true)
         }
     }
 }
