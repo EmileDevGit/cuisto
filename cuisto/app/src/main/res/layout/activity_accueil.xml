@@ -64,16 +64,17 @@
 
             <!-- Bouton principal -->
             <Button
+                android:id="@+id/btnNouvelleRecette"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Créons ta recette 😉"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bouton_arrondi"
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
-                android:layout_gravity="center_horizontal" />
+                android:text="Créons ta recette 😉"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white" />
 
             <!-- Grille de recettes -->
             <GridLayout

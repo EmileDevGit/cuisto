@@ -41,18 +41,19 @@
                 android:id="@+id/tietEtape"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F1F1F1"
+                android:background="@drawable/fond_champ_recherche"
                 android:clickable="true"
                 android:cursorVisible="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="top|start"
+                android:imeOptions="flagNoEnterAction"
                 android:inputType="textMultiLine"
-                android:maxLines="100"
                 android:minLines="1"
-                android:overScrollMode="ifContentScrolls"
-                android:scrollbars="vertical"
-                android:textSize="12sp" />
+                android:overScrollMode="never"
+                android:padding="8dp"
+                android:scrollbars="none"
+                android:scrollHorizontally="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageButton

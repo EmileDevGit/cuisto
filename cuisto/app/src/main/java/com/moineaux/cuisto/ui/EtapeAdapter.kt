@@ -44,14 +44,14 @@ class EtapeAdapter(
 
         (editTextEtape.tag as? TextWatcher)?.let { editTextEtape.removeTextChangedListener(it) } // <-- Supprime le TextWatcher précédent pour éviter les problèmes de synchronisation
 
-        val descriptionActuelle = mapEtapesActuelles[etape.id] ?: etape.description
+        val descriptionActuelle = mapEtapesActuelles[etape.tempid] ?: etape.description
         editTextEtape.setText(descriptionActuelle)
 
         // Bloc du TextWatcher pour synchroniser les données avec la map avec l'ID de l'étape
         val watcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                mapEtapesActuelles[etape.id] = s?.toString() ?: ""
+                mapEtapesActuelles[etape.tempid] = s?.toString() ?: ""
             }
             override fun afterTextChanged(s: Editable?) {}
         }
@@ -63,9 +63,9 @@ class EtapeAdapter(
         holder.btnRetirerEtape.setOnClickListener {
             val pos = holder.bindingAdapterPosition
             if (pos != RecyclerView.NO_POSITION) {
-                val id = getItem(pos).id // <-- Récupère l'ID de l'étape à retirer
+                val tempid = getItem(pos).tempid // <-- Récupère l'ID de l'étape à retirer
                 onRetirerEtape(pos)
-                mapEtapesActuelles.remove(id)
+                mapEtapesActuelles.remove(tempid)
             }
         }
 
@@ -79,7 +79,7 @@ class EtapeAdapter(
 
     fun getCurrentDescriptions(): List<String> {
         return currentList.map { etape ->
-            mapEtapesActuelles[etape.id] ?: etape.description
+            mapEtapesActuelles[etape.tempid] ?: etape.description
         }
     }
 
@@ -88,7 +88,7 @@ class EtapeAdapter(
 // Classe permettant de comparer les items de la liste
 class EtapeDiffCallback : DiffUtil.ItemCallback<Etape>() {
     override fun areItemsTheSame(ancienneEtape: Etape, nouvelleEtape: Etape): Boolean {
-        return ancienneEtape.id == nouvelleEtape.id
+        return ancienneEtape.tempid == nouvelleEtape.tempid
     }
     override fun areContentsTheSame(ancienneEtapeDescription: Etape, nouvelleEtapeDescription: Etape): Boolean {
         return ancienneEtapeDescription == nouvelleEtapeDescription

@@ -9,6 +9,7 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.util.Log
+import android.widget.Button
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -47,6 +48,7 @@ class ToutesRecettesActivity : AppCompatActivity() {
         // *************************  Récupération des recettes **************************
 
         lifecycleScope.launch {
+
             var recettes = withContext(Dispatchers.IO) {
                 db.recetteDao().toutRecuperer()
             }
@@ -94,6 +96,12 @@ class ToutesRecettesActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
             finish()
+        }
+
+        val btnAjouter = findViewById<Button>(R.id.btn_ajouter)
+        btnAjouter.setOnClickListener {
+            val intent = Intent(this, AjouterRecetteActivity::class.java)
+            startActivity(intent)
         }
 
         // ****************** PERMET DAVOIR DEUX COULEUR SUR LE TEXTE ***************

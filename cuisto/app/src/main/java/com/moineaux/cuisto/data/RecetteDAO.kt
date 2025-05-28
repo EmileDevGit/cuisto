@@ -4,10 +4,13 @@ import androidx.room.*
 
 @Dao
 interface RecetteDAO {
-    @Insert suspend fun sauvegarderRecette(recette: Recette): Long
+    @Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun sauvegarderRecette(recette: Recette): Long
+
     @Insert suspend fun sauvegarderListeEtapes(etapes: List<Etape>)
+
     @Query("SELECT * FROM Recette")
     suspend fun toutRecuperer(): List<Recette>
+
     @Query("DELETE FROM Recette")
     fun supprimerToutesLesRecettes()
 
@@ -30,10 +33,16 @@ interface RecetteDAO {
 
     @Transaction
     suspend fun insertRecetteAvecEtapes(recette: Recette, listeEtapes: List<Etape>) {
-        val recetteId = sauvegarderRecette(recette) // Sauvegarder la recette et obtenir son ID
-        for (etape in listeEtapes) {
-            etape.recetteId = recetteId // Associer chaque étape à la recette
+        val recetteId = sauvegarderRecette(recette) // ID auto-généré de la recette
+
+        val etapesAvecId = listeEtapes.mapIndexed { index, etape ->
+            etape.copy(recetteId = recetteId, ordre = index)
         }
-        sauvegarderListeEtapes(listeEtapes)
+
+        sauvegarderListeEtapes(etapesAvecId)
     }
+
+    @Query("SELECT * FROM Recette WHERE nomRecette = :nom")
+    suspend fun recetteParNom(nom: String): Recette?
+
 }

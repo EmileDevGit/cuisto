@@ -38,6 +38,17 @@ class AccueilActivity : AppCompatActivity() {
             val intent = Intent(this, ToutesRecettesActivity::class.java)
             startActivity(intent)
         }
+
+
+                                // Logique à réutiliser pour la modification
+        val btnAjouterRecette = findViewById<Button>(R.id.btnNouvelleRecette)
+        btnAjouterRecette.setOnClickListener {
+            val intent = Intent(this, AjouterRecetteActivity::class.java)
+            intent.putExtra("is_new_recette", true)
+            intent.putExtra("recette_id", -1)
+            startActivity(intent)
+        }
+
         // ************ Ecouteur sur images categorie *********************
 
         // CLIC SUR CATEGORIE PIZZA

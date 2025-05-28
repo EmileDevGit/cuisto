@@ -13,8 +13,8 @@
         android:id="@+id/ivLogo"
         android:layout_width="131dp"
         android:layout_height="54dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/cuisto_logo" />
@@ -36,9 +36,11 @@
             android:id="@+id/tietIngredients"
             android:layout_width="match_parent"
             android:layout_height="98dp"
-            android:background="#F1F1F1"
+            android:background="@drawable/fond_champ_recherche"
             android:gravity="top|start"
             android:hint="Les ingrédients"
+            android:inputType="textMultiLine"
+            android:padding="10dp"
             android:textSize="12sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,10 +68,14 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietNomRecette"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#F1F1F1"
+            android:layout_height="32dp"
+            android:background="@drawable/fond_champ_recherche"
             android:hint="Nomme ta recette"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:inputType="text"
+            android:padding="3dp"
+            android:paddingStart="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="14dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- RecyclerView scrollable entre header et footer -->
@@ -87,11 +93,12 @@
             android:id="@+id/actvCategorie"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F1F1F1"
+            android:background="@drawable/fond_champ_recherche"
             android:completionThreshold="1"
             android:inputType="text"
-            android:paddingLeft="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:paddingLeft="10dp"
+            android:textSize="14dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -155,6 +162,8 @@
             android:backgroundTint="#FD655A"
             android:text="Annuler"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
             app:cornerRadius="8dp" />
 
         <Button
@@ -166,7 +175,10 @@
             android:layout_weight="1"
             android:backgroundTint="#01A925"
             android:text="Enregistrer"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
             app:cornerRadius="8dp" />
     </LinearLayout>
 

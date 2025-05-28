@@ -19,4 +19,8 @@ interface CategorieDAO {
     @Query("SELECT nom FROM categorie WHERE id = :id LIMIT 1")
     suspend fun getNomCategorieParId(id: Long): String?
 
+    @Query("SELECT nom FROM Categorie")
+    suspend fun getAllNomsCategories(): List<String>
+
+
 }
