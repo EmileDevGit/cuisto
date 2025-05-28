@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.moineaux.cuisto.R
 import com.moineaux.cuisto.viewmodel.AfficherRecetteDetailViewModel
@@ -88,18 +89,20 @@ class AfficherRecetteDetailActivity : AppCompatActivity() {
 
                 if (idResource != 0) {
                     // C'est un resource 'drawable'
-                    Glide.with(this)
-                        .load(idResource)
-                        .placeholder(R.drawable.imgdefaut_recette)
-                        .error(R.drawable.imgdefaut_recette)
-                        .into(ivRecette)
+//                    Glide.with(this)
+//                        .load(idResource)
+//                        .placeholder(R.drawable.imgdefaut_recette)
+//                        .error(R.drawable.imgdefaut_recette)
+//                        .into(ivRecette)
+                    ivRecette.setImageResource(idResource)
                 } else {
                     // Si c'est un autre chemin (fichier de l utilisateur)
-                    Glide.with(this)
-                        .load(srcImage) // charger a partir d un chemin
-                        .placeholder(R.drawable.imgdefaut_recette)
-                        .error(R.drawable.imgdefaut_recette)
-                        .into(ivRecette)
+//                    Glide.with(this)
+//                        .load(srcImage.toUri()) // charger a partir d un chemin
+//                        .placeholder(R.drawable.imgdefaut_recette)
+//                        .error(R.drawable.imgdefaut_recette)
+//                        .into(ivRecette)
+                    ivRecette.setImageURI(srcImage.toUri())
                 }
             } else {
                 ivRecette.setImageResource(R.drawable.imgdefaut_recette)

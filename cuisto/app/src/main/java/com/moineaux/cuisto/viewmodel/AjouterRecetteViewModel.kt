@@ -15,6 +15,8 @@ import com.moineaux.cuisto.data.Recette
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileOutputStream
 
 class AjouterRecetteViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -41,7 +43,31 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
     val imageUri: LiveData<Uri?> = _imageUri
 
     fun definirImage(uri: Uri) {
-        _imageUri.value = uri
+        viewModelScope.launch(Dispatchers.IO) {
+            val context = getApplication<Application>().applicationContext
+            try {
+                val inputStream = context.contentResolver.openInputStream(uri)
+                val fileName = "recette_image_${System.currentTimeMillis()}.jpg"
+                val imageFile = File(context.filesDir, fileName)
+
+                inputStream?.use { input ->
+                    FileOutputStream(imageFile).use { output ->
+                        input.copyTo(output)
+                    }
+                }
+
+                val localUri = Uri.fromFile(imageFile)
+                withContext(Dispatchers.Main) {
+                    _imageUri.value = localUri
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    _message.value = "Erreur lors de la copie de l'image"
+                }
+            }
+        }
     }
     fun reinitialiserImage() {
         _imageUri.value = null
