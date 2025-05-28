@@ -3,15 +3,12 @@ package com.moineaux.cuisto.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.moineaux.cuisto.R
 import com.moineaux.cuisto.data.Etape
-import com.moineaux.cuisto.data.Ingredient
-import androidx.core.net.toUri
 import com.moineaux.cuisto.data.Recette
 
 class AfficherRecetteDetailViewModel: ViewModel() {
-    private val _ingredients = MutableLiveData<List<Ingredient>>(emptyList())
-    val listIngredientRecetteDetail : LiveData<List<Ingredient>> = _ingredients
+    private val _ingredients = MutableLiveData<String>()
+    val ingredientsRecetteDetail : LiveData<String> = _ingredients
 
     private val _etapes = MutableLiveData<List<Etape>>(emptyList())
     val listEtapeRecetteDetail : LiveData<List<Etape>> = _etapes
@@ -32,7 +29,7 @@ class AfficherRecetteDetailViewModel: ViewModel() {
             0,
             "Salade de quinoa",
             "saladequinoa",
-            "quinoa, concombre jus de citron",
+            "200g de quinoa, 1 concombre, jus de citron",
             1
         )
         val listEtapes : List<Etape> = listOf(
@@ -41,6 +38,11 @@ class AfficherRecetteDetailViewModel: ViewModel() {
             Etape(0, 0, 3, "Mélanger le quinoa, le concombre et assaisonner avec le jus de citron, sel et poivre.")
         )
 
+        _etapes.value = listEtapes
+        _nomRecette.value = recette.nomRecette
+        _categorieRecette.value = "Salade" // recuperer a partir du bd
+        _ingredients.value = recette.ingredients
+        _imageUri.value = recette.image
     }
 
 //    private fun afficherMock1() {
