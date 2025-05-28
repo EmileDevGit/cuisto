@@ -11,6 +11,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun recetteDao(): RecetteDAO
     abstract fun categorieDao(): CategorieDAO
+    abstract fun etapeDao(): EtapeDAO
 
 
     companion object {
