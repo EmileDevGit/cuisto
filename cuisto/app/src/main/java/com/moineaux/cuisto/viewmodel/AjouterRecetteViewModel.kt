@@ -125,7 +125,7 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
 
         // Validation des étapes
         val etapes = _etapes.value
-        if (nom.isBlank() || ingredients.isBlank() || categorieNom.isBlank()) {
+        if (nom.isBlank() || ingredients.isBlank() || categorieNom.isBlank() || imageUri == null) {
             _message.value = "Veuillez remplir tous les champs"
             return
         }
