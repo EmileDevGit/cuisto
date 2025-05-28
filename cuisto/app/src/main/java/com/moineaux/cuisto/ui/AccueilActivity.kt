@@ -60,6 +60,7 @@ class AccueilActivity : AppCompatActivity() {
         val boutonToutesRecettes = findViewById<Button>(R.id.btn_toutes_recettes)
         boutonToutesRecettes.setOnClickListener {
             val intent = Intent(this, ToutesRecettesActivity::class.java)
+            intent.putExtra("itemRechercher", "")
             startActivity(intent)
         }
         // ************ Ecouteur sur images categorie *********************
