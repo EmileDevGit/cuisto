@@ -84,7 +84,7 @@ class AccueilActivity : AppCompatActivity() {
         lifecycleScope.launch {
 
 
-            val recettes = db.recetteDao().toutRecuperer()
+            val recettes = db.recetteDao().recupererRecettesMock()
 
             // ****************** POUR DEBUGGER + DANS LOGCAT : recherche DEBUG_RECETTES **************************
 
