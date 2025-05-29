@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -40,6 +41,12 @@ class RecettesParCategorie : AppCompatActivity() {
                 return@setOnKeyListener true
             }
             return@setOnKeyListener false
+        }
+
+        val btnAjouterRecette: Button = findViewById(R.id.btn_ajouter)
+        btnAjouterRecette.setOnClickListener {
+            val intention = Intent(this, AjouterOuEditerRecetteActivity::class.java)
+            startActivity(intention)
         }
 
 //        *************** LOGO POUR REVENIR SUR LA PAGE D'ACCUEIL ************
