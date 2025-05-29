@@ -3,6 +3,7 @@ package com.moineaux.cuisto.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.moineaux.cuisto.data.AppDatabase
 import com.moineaux.cuisto.data.MockData
@@ -15,6 +16,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class RecetteViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val _messageRecetteVide = MutableLiveData<Boolean>()
+    val messageRecetteVide : LiveData<Boolean> = _messageRecetteVide
+
     fun supprimerToutesLesRecettes() {
         Thread {
             repository.db.recetteDao().supprimerToutesLesRecettes()
@@ -41,6 +46,10 @@ class RecetteViewModel(application: Application) : AndroidViewModel(application)
                 }
             } else {
                 toutesRecettes
+            }
+
+            if (toutesRecettes.isEmpty()) {
+                _messageRecetteVide.value = true
             }
 
             val regroupées = withContext(Dispatchers.IO) {
