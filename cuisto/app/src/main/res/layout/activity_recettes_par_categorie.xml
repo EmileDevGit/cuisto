@@ -68,7 +68,18 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/bouton_arrondi_pas_cliquable"
             android:layout_gravity="center_horizontal" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSupprimerCategorie"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="240dp"
+        android:background="@drawable/delete_icone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Scroll uniquement sur les recettes -->
     <ScrollView

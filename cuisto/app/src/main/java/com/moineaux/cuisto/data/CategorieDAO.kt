@@ -27,6 +27,8 @@ interface CategorieDAO {
     @Query("SELECT DISTINCT * FROM Categorie")
     suspend fun getToutesLesCategories(): List<Categorie>
 
+    @Query("DELETE FROM Categorie WHERE nom = :nom")
+    suspend fun supprimerCategorie(nom: String)
 
 
 }

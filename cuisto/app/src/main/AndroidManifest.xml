@@ -61,7 +61,7 @@
 <!--            </intent-filter>-->
         </activity>
         <activity android:name=".ui.ToutesRecettesActivity" />
-        <activity android:name=".ui.RecettesParCategorie" />
+        <activity android:name=".ui.RecettesParCategorieActivity" />
 
 
     </application>

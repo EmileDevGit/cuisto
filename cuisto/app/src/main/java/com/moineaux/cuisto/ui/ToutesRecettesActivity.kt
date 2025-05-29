@@ -31,8 +31,9 @@ class ToutesRecettesActivity : AppCompatActivity() {
 
         val factory = RecetteViewModelFactory(application)
         viewModel = ViewModelProvider(this, factory)[RecetteViewModel::class.java]
-
         afficherCategoriesDynamiquement()
+
+
         val btnAjouter = findViewById<Button>(R.id.btn_ajouter)
         btnAjouter.setOnClickListener {
             val intent = Intent(this, AjouterOuEditerRecetteActivity::class.java)
@@ -53,12 +54,7 @@ class ToutesRecettesActivity : AppCompatActivity() {
 
 
         var filtre = intent.getStringExtra("itemRechercher")
-
-
-        // :A valider
-        //viewModel.chargerRecettes(filtre)
         val barreRecherche: EditText = findViewById(R.id.champ_recherche)
-
         barreRecherche.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 val filtre = barreRecherche.text.toString()
@@ -84,7 +80,7 @@ class ToutesRecettesActivity : AppCompatActivity() {
         // *************** Petit délai pour laisser les données s’insérer ************************
 
         lifecycleScope.launch {
-            kotlinx.coroutines.delay(1000)
+            kotlinx.coroutines.delay(200)
             viewModel.chargerRecettes(filtre)
 
             viewModel.recettesParCategorie.collect { recettesParCategorie ->
@@ -174,7 +170,7 @@ class ToutesRecettesActivity : AppCompatActivity() {
                 // ************* Clique sur la catégorie → ouvre la page des recettes **************
 
                 bloc.setOnClickListener {
-                    val intent = Intent(this@ToutesRecettesActivity, RecettesParCategorie::class.java)
+                    val intent = Intent(this@ToutesRecettesActivity, RecettesParCategorieActivity::class.java)
                     intent.putExtra("categorie", cat.nom)
                     startActivity(intent)
                 }
@@ -185,7 +181,7 @@ class ToutesRecettesActivity : AppCompatActivity() {
     }
 
     private fun ouvrirCategorie(nomCategorie: String) {
-        val intent = Intent(this, RecettesParCategorie::class.java)
+        val intent = Intent(this, RecettesParCategorieActivity::class.java)
         intent.putExtra("categorie", nomCategorie)
         startActivity(intent)
     }

@@ -117,4 +117,10 @@ class RecetteViewModel(application: Application) : AndroidViewModel(application)
     fun getRecettesParCategorie(idCategorie: Long): LiveData<List<Recette>> {
         return repository.getRecettesParCategorie(idCategorie)
     }
+
+    fun supprimerCategorie(nomCategorie: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.db.categorieDao().supprimerCategorie(nomCategorie)
+        }
+    }
 }

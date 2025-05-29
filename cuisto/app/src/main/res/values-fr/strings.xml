@@ -27,4 +27,7 @@
     <string name="msgCondition4_AjoutRecette">Une recette avec ce nom existe déjà.</string>
     <string name="recetteEnregistrer_succes">Recette enregistrée avec succès</string>
     <string name="recetteModifiee_succes">Recette modifiée avec succès</string>
+    <string name="msg_categorie_supprimer">La catégorie à été supprimée</string>
+    <string name="titre_supprimerCategorie">Supprimer une catégorie</string>
+    <string name="confirmation_textSupprimerCategorie">Êtes-vous sûr de vouloir supprimer cette catégorie? Cela supprimer TOUTES les recettes contenues et est irréversible.</string>
 </resources>

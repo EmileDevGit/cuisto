@@ -3,11 +3,13 @@ package com.moineaux.cuisto.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.inputmethod.EditorInfo
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
@@ -19,7 +21,7 @@ import com.moineaux.cuisto.data.Categorie
 import com.moineaux.cuisto.viewmodel.RecetteViewModel
 import kotlinx.coroutines.launch
 
-class RecettesParCategorie : AppCompatActivity() {
+class RecettesParCategorieActivity : AppCompatActivity() {
 
     private lateinit var viewModel: RecetteViewModel
     private lateinit var database: AppDatabase
@@ -42,6 +44,26 @@ class RecettesParCategorie : AppCompatActivity() {
             return@setOnKeyListener false
         }
 
+        // On récupère le nom de la catégorie envoyée par l’écran précédent
+        val nomCategorie = intent.getStringExtra("categorie") ?: return
+
+        val btnSupprimerCategorie: Button = findViewById(R.id.btnSupprimerCategorie)
+        btnSupprimerCategorie.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle(getString(R.string.titre_supprimerCategorie))
+                .setMessage(getString(R.string.confirmation_textSupprimerCategorie))
+                .setPositiveButton(getString(R.string.text_oui)) { _, _ ->
+                    viewModel.supprimerCategorie(nomCategorie)
+                    Toast.makeText(this,
+                        getString(R.string.msg_categorie_supprimer), Toast.LENGTH_SHORT).show()
+                    val intention = Intent(this, ToutesRecettesActivity::class.java)
+                    startActivity(intention)
+                    finish() // Fermer l'activité après la suppression
+                }
+                .setNegativeButton(getString(R.string.bouton_annuler_AjouterRecette), null)
+                .show()
+        }
+
 //        *************** LOGO POUR REVENIR SUR LA PAGE D'ACCUEIL ************
 
         findViewById<ImageView>(R.id.logo_cuisto).setOnClickListener {
@@ -50,9 +72,6 @@ class RecettesParCategorie : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
-        // On récupère le nom de la catégorie envoyée par l’écran précédent
-        val nomCategorie = intent.getStringExtra("categorie") ?: return
 
         // On affiche ce nom dans le bouton marron au dessus de l'image --- activity_recettes_par_categorie.xml
         findViewById<TextView>(R.id.texte_categorie).text = nomCategorie
@@ -70,7 +89,7 @@ class RecettesParCategorie : AppCompatActivity() {
                 val idCategorie = categorie.id
 
                 // On observe les recettes liées à cette catégorie
-                viewModel.getRecettesParCategorie(idCategorie).observe(this@RecettesParCategorie) { recettes ->
+                viewModel.getRecettesParCategorie(idCategorie).observe(this@RecettesParCategorieActivity) { recettes ->
 
                     // On récupère la zone où on va afficher les recettes
                     val layoutRecettes = findViewById<LinearLayout>(R.id.zone_dynamique_recettes)
@@ -94,7 +113,7 @@ class RecettesParCategorie : AppCompatActivity() {
                         }
 
                         image.setOnClickListener {
-                            val intention = Intent(this@RecettesParCategorie, AfficherRecetteDetailActivity::class.java)
+                            val intention = Intent(this@RecettesParCategorieActivity, AfficherRecetteDetailActivity::class.java)
                             intention.putExtra("recetteid", recette.id)
                             startActivity(intention)
                         }
@@ -111,7 +130,7 @@ class RecettesParCategorie : AppCompatActivity() {
 
     }
     private fun ouvrirCategorie(nomCategorie: String) {
-        val intent = Intent(this, RecettesParCategorie::class.java)
+        val intent = Intent(this, RecettesParCategorieActivity::class.java)
         intent.putExtra("categorie", nomCategorie)
         startActivity(intent)
     }
@@ -139,7 +158,7 @@ class RecettesParCategorie : AppCompatActivity() {
                 // Image (depuis drawable)
                 val resId = resources.getIdentifier(cat.image, "drawable", packageName)
                 if (resId != 0) {
-                    Glide.with(this@RecettesParCategorie).load(resId).into(image)
+                    Glide.with(this@RecettesParCategorieActivity).load(resId).into(image)
                 } else {
                     image.setImageResource(R.drawable.defaut)
                 }
@@ -147,7 +166,7 @@ class RecettesParCategorie : AppCompatActivity() {
                 // *********** Clique sur la catégorie → ouvre la page des recettes *************
 
                 bloc.setOnClickListener {
-                    val intent = Intent(this@RecettesParCategorie, RecettesParCategorie::class.java)
+                    val intent = Intent(this@RecettesParCategorieActivity, RecettesParCategorieActivity::class.java)
                     intent.putExtra("categorie", cat.nom)
                     startActivity(intent)
                 }

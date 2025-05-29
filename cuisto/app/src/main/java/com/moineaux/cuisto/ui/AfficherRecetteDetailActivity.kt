@@ -50,8 +50,6 @@ class AfficherRecetteDetailActivity : AppCompatActivity() {
 
         val ivLogo: ImageView = findViewById(R.id.imgVLogoRecetteDetail)
         ivLogo.setOnClickListener {
-            val intention = Intent(this, AccueilActivity::class.java)
-            startActivity(intention)
             finish()
         }
 
@@ -65,7 +63,7 @@ class AfficherRecetteDetailActivity : AppCompatActivity() {
 
 
 
-        val btnModifierRecette: Button = findViewById(R.id.btnEditerRecette)
+        val btnModifierRecette: Button = findViewById(R.id.btnEditerCategorie)
         btnModifierRecette.setOnClickListener {
             val intention = Intent(this, AjouterOuEditerRecetteActivity::class.java)
             intention.putExtra("is_new_recette", false)
@@ -74,7 +72,7 @@ class AfficherRecetteDetailActivity : AppCompatActivity() {
             finish()
         }
 
-        val btnSupprimerRecette: Button = findViewById(R.id.btnSupprimerRecette)
+        val btnSupprimerRecette: Button = findViewById(R.id.btnSupprimerCategorie)
         btnSupprimerRecette.setOnClickListener {
             AlertDialog.Builder(this)
                 .setTitle(getString(R.string.titre_supprimerRecette))

@@ -130,22 +130,12 @@ class AjouterOuEditerRecetteViewModel(application: Application) : AndroidViewMod
         }
     }
 
-//    fun deplacerEtape(positionInitiale: Int, positionFinale: Int) {
-//        val listeEtapesActuelle = _etapes.value.orEmpty().toMutableList()
-//        if (positionInitiale in listeEtapesActuelle.indices && positionFinale in listeEtapesActuelle.indices) {
-//            val item = listeEtapesActuelle.removeAt(positionInitiale)
-//            listeEtapesActuelle.add(positionFinale, item)
-//            _etapes.value = listeEtapesActuelle
-//        }
-//    }
-
     fun deplacerEtape(positionInitiale: Int, positionFinale: Int) {
         val listeEtapesActuelle = _etapes.value.orEmpty().toMutableList()
         if (positionInitiale in listeEtapesActuelle.indices && positionFinale in listeEtapesActuelle.indices) {
             val item = listeEtapesActuelle.removeAt(positionInitiale)
             listeEtapesActuelle.add(positionFinale, item)
 
-            // 🔁 Mise à jour des ordres
             listeEtapesActuelle.forEachIndexed { index, etape ->
                 etape.ordre = index
             }
