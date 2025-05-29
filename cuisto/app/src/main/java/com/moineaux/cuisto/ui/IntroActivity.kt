@@ -13,6 +13,7 @@ class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
 
         // Vérifie si c'est la première ouverture
