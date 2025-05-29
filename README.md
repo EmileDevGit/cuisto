@@ -23,7 +23,7 @@ est disponible dans le fichier `analyse.md`
 | Émile       | Stockage dans une base de donnée locale SQL|
 | Kelly       | Afficher toutes les recettes |
 | Kelly       | Recherche par filtre (nom, ingrédients, catégorie, ...)|
-| Kristopher  | Ajouter / Modifier / Supprimer une catégorie|
+| Kristopher  | Barre de recherche, I18n|
 | Kristopher  | Afficher une recette en détail|
 
 
@@ -37,29 +37,24 @@ est disponible dans le fichier `analyse.md`
     erDiagram
     "CATÉGORIE" ||--|{ RECETTE : appartenir
     "CATÉGORIE"{
-        int id
+        long id
         string nom
+        string image
     }
-    RECETTE ||--|{ "INGRÉDIENT" : avoir
     RECETTE{
-        int id
-        string titre
-        string imageURL
-        string description
-        string tempsPreparation
-        int portions
-        int id_categorie
-    }
-    "INGRÉDIENT"{
-        int id
-        string nom
-        int id_recette
+        long id
+        string nomRecette
+        string image
+        string ingredients
+        long categorieId
+        int isMock
     }
     "ÉTAPE" }|--|| RECETTE : a
     "ÉTAPE"{
-        int id
-        int numero_etape
+        long id
+        long recetteId
+        int ordre
         string description
-        int id_recette
+        
     }
 ```
