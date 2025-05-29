@@ -21,8 +21,12 @@ est disponible dans le fichier `analyse.md`
 | :--- | :--- |
 | Émile       | Ajouter / Modifier/Supprimer une recette|
 | Émile       | Stockage dans une base de donnée locale SQL|
-| Kelly       | Afficher toutes les recettes |
-| Kelly       | Recherche par filtre (nom, ingrédients, catégorie, ...)|
+| Kelly       | Conception maquette |
+| Kelly       | Introduction |
+| Kelly       | Remplissage de la base de donnee + Compression images |
+| Kelly       | Accueil + Bloc de categorie 'Bas de page' dynamique |
+| Kelly       | Toutes les recettes |
+| Kelly       | Recette par categorie |
 | Kristopher  | Barre de recherche, I18n|
 | Kristopher  | Afficher une recette en détail|
 
