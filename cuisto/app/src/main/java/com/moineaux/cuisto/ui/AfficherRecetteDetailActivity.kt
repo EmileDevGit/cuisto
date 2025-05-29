@@ -7,7 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
@@ -24,75 +26,114 @@ class AfficherRecetteDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_afficher_recette_detail)
 
-        adapterEtape = AfficherRecetteEtapesAdapter()
+
+        val idRecette = intent.getLongExtra("recetteid", 0)
+        recetteDetailViewModel.afficherRecette( idRecette )
 
 
-        rvEtapes = findViewById(R.id.rvEtapesRecetteDetail)
-        val tvIngredients: TextView = findViewById(R.id.tvIngredientsActuelRecetteDetail)
-        val tvNom: TextView = findViewById(R.id.tvNomRecetteDetail)
-        val tvCategorie: TextView = findViewById(R.id.tvNomCategorieRecetteDetail)
-        val ivRecette: ImageView = findViewById(R.id.imgVPhotoRecetteDetail)
-        val ivLogo: ImageView = findViewById(R.id.imgVLogoRecetteDetail)
-        val btnAjouterRecette: Button = findViewById(R.id.btnAjouteRecetteDetail)
         val barreRecherche: EditText = findViewById(R.id.etRechercheRecetteDetail)
         barreRecherche.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+
                 val itemRechercher = barreRecherche.text.toString()
                 val intention = Intent(this, ToutesRecettesActivity::class.java)
                 intention.putExtra("itemRechercher", itemRechercher)
                 startActivity(intention)
                 finish()
                 return@setOnKeyListener true
+
             }
             return@setOnKeyListener false
         }
 
-        rvEtapes.adapter = adapterEtape
 
+
+        val ivLogo: ImageView = findViewById(R.id.imgVLogoRecetteDetail)
         ivLogo.setOnClickListener {
             val intention = Intent(this, AccueilActivity::class.java)
-//            startActivity(intention)
+            startActivity(intention)
             finish()
         }
+
+
+
+        val btnAjouterRecette: Button = findViewById(R.id.btnAjouteRecetteDetail)
         btnAjouterRecette.setOnClickListener {
-            val intention = Intent(this, AjouterRecetteActivity::class.java)
+            val intention = Intent(this, AjouterOuEditerRecetteActivity::class.java)
             startActivity(intention)
-//            finish()
         }
 
+
+
+        val btnModifierRecette: Button = findViewById(R.id.btnEditerRecette)
+        btnModifierRecette.setOnClickListener {
+            val intention = Intent(this, AjouterOuEditerRecetteActivity::class.java)
+            intention.putExtra("is_new_recette", false)
+            intention.putExtra("recette_id", idRecette)
+            startActivity(intention)
+            finish()
+        }
+
+        val btnSupprimerRecette: Button = findViewById(R.id.btnSupprimerRecette)
+        btnSupprimerRecette.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Supprimer la recette")
+                .setMessage("Êtes-vous sûr de vouloir supprimer cette recette ? Cette action est irréversible.")
+                .setPositiveButton("Oui") { _, _ ->
+                    recetteDetailViewModel.supprimerRecette(idRecette)
+                    Toast.makeText(this, "Recette supprimée", Toast.LENGTH_SHORT).show()
+                    finish() // Fermer l'activité après la suppression
+                    val intention = Intent(this, ToutesRecettesActivity::class.java)
+                    startActivity(intention)
+                }
+                .setNegativeButton("Annuler", null)
+                .show()
+        }
+        recetteDetailViewModel.isMock.observe(this) { mockValue ->
+            btnSupprimerRecette.visibility = if (mockValue == 0) Button.VISIBLE else Button.GONE
+            btnModifierRecette.visibility = btnSupprimerRecette.visibility
+        }
+
+
+
+        val tvIngredients: TextView = findViewById(R.id.tvIngredientsActuelRecetteDetail)
         recetteDetailViewModel.ingredientsRecetteDetail.observe(this) { ingredients ->
             tvIngredients.text = ingredients
         }
+
+
+
+        adapterEtape = AfficherRecetteEtapesAdapter()
+        rvEtapes = findViewById(R.id.rvEtapesRecetteDetail)
+        rvEtapes.adapter = adapterEtape
         recetteDetailViewModel.listEtapeRecetteDetail.observe(this) { etapes ->
             adapterEtape.submitList(etapes)
         }
+
+
+
+        val tvNom: TextView = findViewById(R.id.tvNomRecetteDetail)
         recetteDetailViewModel.nomRecetteDetail.observe(this) { nom ->
             tvNom.text = nom
         }
+
+
+
+        val tvCategorie: TextView = findViewById(R.id.tvNomCategorieRecetteDetail)
         recetteDetailViewModel.categorieRecetteDetail.observe(this) { categorie ->
             tvCategorie.text = categorie
         }
-        recetteDetailViewModel.imageUri.observe(this) { srcImage ->
 
+
+
+        val ivRecette: ImageView = findViewById(R.id.imgVPhotoRecetteDetail)
+        recetteDetailViewModel.imageUri.observe(this) { srcImage ->
             if (srcImage != null) {
                 // Premierement essaie de voir si c'est un drawable (Image avec l'app)
                 val idResource = resources.getIdentifier(srcImage, "drawable", packageName)
-
                 if (idResource != 0) {
-                    // C'est un resource 'drawable'
-//                    Glide.with(this)
-//                        .load(idResource)
-//                        .placeholder(R.drawable.imgdefaut_recette)
-//                        .error(R.drawable.imgdefaut_recette)
-//                        .into(ivRecette)
                     ivRecette.setImageResource(idResource)
                 } else {
-                    // Si c'est un autre chemin (fichier de l utilisateur)
-//                    Glide.with(this)
-//                        .load(srcImage.toUri()) // charger a partir d un chemin
-//                        .placeholder(R.drawable.imgdefaut_recette)
-//                        .error(R.drawable.imgdefaut_recette)
-//                        .into(ivRecette)
                     ivRecette.setImageURI(srcImage.toUri())
                 }
             } else {
@@ -100,8 +141,8 @@ class AfficherRecetteDetailActivity : AppCompatActivity() {
             }
         }
 
-        val idRecette = intent.getLongExtra("recetteid", 0)
 
-        recetteDetailViewModel.afficherRecette( idRecette )
+
+
     }
 }

@@ -1,7 +1,6 @@
 package com.moineaux.cuisto.ui
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -23,15 +22,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.moineaux.cuisto.data.Etape
+import androidx.core.net.toUri
 
-class AjouterRecetteActivity() : AppCompatActivity() {
+class AjouterOuEditerRecetteActivity() : AppCompatActivity() {
 
     // Variables à initialiser plus tard
     private lateinit var etNomRecette: EditText
     private lateinit var etIngredients: EditText
     private lateinit var actvCategorie: AutoCompleteTextView
 
-    private val ajouterRecetteViewModel: AjouterRecetteViewModel by viewModels()
+    private val ajouterOuEditerRecetteViewModel: AjouterOuEditerRecetteViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: EtapeAdapter
     private lateinit var itemTouchHelper: ItemTouchHelper
@@ -43,7 +43,7 @@ class AjouterRecetteActivity() : AppCompatActivity() {
     ) { uri: Uri? ->
         if (uri != null) {
             btnChoisirImage.setImageURI(uri)
-            ajouterRecetteViewModel.definirImage(uri)
+            ajouterOuEditerRecetteViewModel.definirImage(uri)
         }
     }
 
@@ -52,21 +52,43 @@ class AjouterRecetteActivity() : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ajouter_recette)
 
-        // Initialisation des vues APRÈS setContentView
+        // 1. Initialisation des vues AVANT tout usage
         etNomRecette = findViewById(R.id.tietNomRecette)
         etIngredients = findViewById(R.id.tietIngredients)
         actvCategorie = findViewById(R.id.actvCategorie)
         btnChoisirImage = findViewById(R.id.ibImageImport)
         recyclerView = findViewById(R.id.rvListeEtapes)
 
-        // Gestion du bouton Annuler
+        val isEdition = intent.getBooleanExtra("is_new_recette", true).not()
+        val idRecette = intent.getLongExtra("recette_id", -1)
+
+        // 2. Charger la recette existante si édition
+        if (isEdition && idRecette != -1L) {
+            ajouterOuEditerRecetteViewModel.chargerRecetteExistante(idRecette)
+
+            // 3. Observer les LiveData APRÈS initialisation des vues
+            ajouterOuEditerRecetteViewModel.recetteExistante.observe(this) { recette ->
+                recette?.let {
+                    etNomRecette.setText(it.nomRecette)
+                    etIngredients.setText(it.ingredients)
+                    btnChoisirImage.setImageURI(it.image.toUri())
+                }
+            }
+            ajouterOuEditerRecetteViewModel.categorieExistante.observe(this) { categorie ->
+                categorie?.let {
+                    actvCategorie.setText(it.nom, false)
+                }
+            }
+        }
+
+        // 4. Gestion du bouton Annuler
         val btnAnnuler: Button = findViewById(R.id.btnCancel)
         btnAnnuler.setOnClickListener {
             Toast.makeText(this, "Nouvelle recette annulée", Toast.LENGTH_SHORT).show()
             finish()
         }
 
-        // Gestion clavier "push" la vue vers le haut
+        // 5. Gestion clavier (pousse la vue vers le haut quand clavier ouvert)
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             val imeInsets = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -78,8 +100,8 @@ class AjouterRecetteActivity() : AppCompatActivity() {
             WindowInsetsCompat.CONSUMED
         }
 
-        // Gestion des catégories
-        ajouterRecetteViewModel.categories.observe(this) { listeNomsCategories ->
+        // 6. Gestion des catégories (AutoCompleteTextView)
+        ajouterOuEditerRecetteViewModel.categories.observe(this) { listeNomsCategories ->
             val adapterCategories = ArrayAdapter(
                 this,
                 android.R.layout.simple_dropdown_item_1line,
@@ -93,7 +115,7 @@ class AjouterRecetteActivity() : AppCompatActivity() {
             }
         }
 
-        // Drag & drop des étapes
+        // 7. Drag & Drop pour les étapes
         val touchHelperCallback = object : ItemTouchHelper.Callback() {
             override fun getMovementFlags(
                 recyclerView: RecyclerView,
@@ -110,7 +132,7 @@ class AjouterRecetteActivity() : AppCompatActivity() {
             ): Boolean {
                 val fromPos = viewHolder.bindingAdapterPosition
                 val toPos = target.bindingAdapterPosition
-                ajouterRecetteViewModel.deplacerEtape(fromPos, toPos)
+                ajouterOuEditerRecetteViewModel.deplacerEtape(fromPos, toPos)
                 return true
             }
 
@@ -120,9 +142,9 @@ class AjouterRecetteActivity() : AppCompatActivity() {
         }
         itemTouchHelper = ItemTouchHelper(touchHelperCallback)
 
-        // Gestion étapes affichage
+        // 8. Configuration RecyclerView et Adapter
         adapter = EtapeAdapter(
-            onRetirerEtape = { position -> ajouterRecetteViewModel.supprimerEtape(position) },
+            onRetirerEtape = { position -> ajouterOuEditerRecetteViewModel.supprimerEtape(position) },
             dragStartListener = object : OnStartDragListener {
                 override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {
                     itemTouchHelper.startDrag(viewHolder)
@@ -133,10 +155,12 @@ class AjouterRecetteActivity() : AppCompatActivity() {
         recyclerView.adapter = adapter
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        ajouterRecetteViewModel.listeEtapes.observe(this) { etapes ->
+        // 9. Observer la liste des étapes et soumettre à l'adapter
+        ajouterOuEditerRecetteViewModel.listeEtapes.observe(this) { etapes ->
             adapter.submitList(etapes)
         }
 
+        // 10. Fonctions utilitaires internes
         fun focusSurDerniereEtape() {
             val dernierePosition = adapter.itemCount - 1
             recyclerView.scrollToPosition(dernierePosition)
@@ -150,7 +174,7 @@ class AjouterRecetteActivity() : AppCompatActivity() {
 
         fun recupererDescriptionsEtapes(): List<Etape> {
             val etapesActuelles = mutableListOf<Etape>()
-            val listeEtapesVm = ajouterRecetteViewModel.listeEtapes.value.orEmpty()
+            val listeEtapesVm = ajouterOuEditerRecetteViewModel.listeEtapes.value.orEmpty()
 
             for (i in 0 until adapter.itemCount) {
                 val holder = recyclerView.findViewHolderForAdapterPosition(i) as? EtapeAdapter.EtapeViewHolder
@@ -165,44 +189,47 @@ class AjouterRecetteActivity() : AppCompatActivity() {
             return etapesActuelles
         }
 
-        // Gestion image
-        ajouterRecetteViewModel.imageUri.observe(this) { uri ->
+        // 11. Observer imageUri pour mise à jour du bouton image
+        ajouterOuEditerRecetteViewModel.imageUri.observe(this) { uri ->
             uri?.let {
                 btnChoisirImage.setImageURI(it)
             }
         }
 
-
+        // 12. Bouton Ajouter étape
         val btnAjouterEtape: ImageButton = findViewById(R.id.btnAjouterEtape)
         btnAjouterEtape.setOnClickListener {
-            ajouterRecetteViewModel.ajouterEtape()
+            ajouterOuEditerRecetteViewModel.ajouterEtape()
             focusSurDerniereEtape()
         }
 
+        // 13. Bouton Choisir Image
         btnChoisirImage.setOnClickListener {
             imagePickerLauncher.launch("image/*")
         }
 
-        // Enregistrement de la recette
+        // 14. Bouton Enregistrer
         val btnEnregistrer: Button = findViewById(R.id.btnSave)
-
         btnEnregistrer.setOnClickListener {
-            // 1. Récupérer les descriptions actuelles des étapes depuis les ViewHolders
+            // 1. Récupérer descriptions des étapes depuis ViewHolders
             val etapesActualisees = recupererDescriptionsEtapes()
 
             // 2. Mettre à jour la liste des étapes dans le ViewModel
-            ajouterRecetteViewModel.mettreAJourEtapes(etapesActualisees)
+            ajouterOuEditerRecetteViewModel.mettreAJourEtapes(etapesActualisees)
 
-            // 3. Lancer l'enregistrement avec la liste à jour
-            ajouterRecetteViewModel.enregistrerRecette(
-                etNomRecette.text.toString(),
-                ajouterRecetteViewModel.imageUri.value,
-                etIngredients.text.toString(),
-                actvCategorie.text.toString()
+            // 3. Lancer l'enregistrement
+            ajouterOuEditerRecetteViewModel.enregistrerRecette(
+                nom = etNomRecette.text.toString(),
+                imageUri = ajouterOuEditerRecetteViewModel.imageUri.value,
+                ingredients = etIngredients.text.toString(),
+                categorieNom = actvCategorie.text.toString(),
+                estNouvelleRecette = !isEdition,
+                idRecette = if (isEdition) idRecette else null
             )
         }
 
-        ajouterRecetteViewModel.fermerActivity.observe(this) { recetteSaved ->
+        // 15. Observer la fermeture de l'activité après enregistrement
+        ajouterOuEditerRecetteViewModel.fermerActivity.observe(this) { recetteSaved ->
             if (recetteSaved == true) {
                 val intent = Intent(this, ToutesRecettesActivity::class.java)
                 startActivity(intent)
@@ -210,8 +237,8 @@ class AjouterRecetteActivity() : AppCompatActivity() {
             }
         }
 
-        // Gestion messages Toast
-        ajouterRecetteViewModel.message.observe(this) {
+        // 16. Observer messages Toast
+        ajouterOuEditerRecetteViewModel.message.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
     }

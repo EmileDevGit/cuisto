@@ -16,7 +16,7 @@ import androidx.room.PrimaryKey
 data class Etape(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     var recetteId: Long,
-    val ordre: Int,
+    var ordre: Int,
     val description: String,
     @Ignore var tempid: Long = 0
 ) {

@@ -1,12 +1,10 @@
 package com.moineaux.cuisto.ui
 
 import android.app.Application
-import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moineaux.cuisto.data.AppDatabase
 import com.moineaux.cuisto.data.Categorie
@@ -17,8 +15,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
+import androidx.core.net.toUri
 
-class AjouterRecetteViewModel(application: Application) : AndroidViewModel(application) {
+class AjouterOuEditerRecetteViewModel(application: Application) : AndroidViewModel(application) {
 
     // INIT
     private val db = AppDatabase.getDatabase(application)
@@ -27,6 +26,12 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
 
     private val _fermerActivity = MutableLiveData<Boolean>(false)
     val fermerActivity: LiveData<Boolean> get() = _fermerActivity
+
+    private val _recetteExistante = MutableLiveData<Recette?>()
+    val recetteExistante: LiveData<Recette?> get() = _recetteExistante
+
+    private val _categorieExistante = MutableLiveData<Categorie?>()
+    val categorieExistante: LiveData<Categorie?> get() = _categorieExistante
 
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> get() = _message
@@ -72,9 +77,28 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
             }
         }
     }
-//    fun reinitialiserImage() {
-//        _imageUri.value = null
-//    }
+
+    fun chargerRecetteExistante(id: Long) {
+        viewModelScope.launch {
+            val recette = withContext(Dispatchers.IO) {
+                db.recetteDao().recupererRecetteAvecId(id)
+            }
+            val etapes = withContext(Dispatchers.IO) {
+                db.etapeDao().recupererlisteEtapesAvecIdRecette(id)
+            }
+            val categorie = withContext(Dispatchers.IO) {
+                db.categorieDao().getCategorieAvecId(recette.categorieId)
+            }
+
+            _recetteExistante.value = recette
+            _etapes.value = etapes.mapIndexed { index, etape ->
+                etape.copy(tempid = idCompteur++, ordre = index)
+            }
+            _categorieExistante.value = categorie
+
+            _imageUri.value = recette.image.toUri()
+        }
+    }
 
 
 
@@ -105,11 +129,26 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
         }
     }
 
+//    fun deplacerEtape(positionInitiale: Int, positionFinale: Int) {
+//        val listeEtapesActuelle = _etapes.value.orEmpty().toMutableList()
+//        if (positionInitiale in listeEtapesActuelle.indices && positionFinale in listeEtapesActuelle.indices) {
+//            val item = listeEtapesActuelle.removeAt(positionInitiale)
+//            listeEtapesActuelle.add(positionFinale, item)
+//            _etapes.value = listeEtapesActuelle
+//        }
+//    }
+
     fun deplacerEtape(positionInitiale: Int, positionFinale: Int) {
         val listeEtapesActuelle = _etapes.value.orEmpty().toMutableList()
         if (positionInitiale in listeEtapesActuelle.indices && positionFinale in listeEtapesActuelle.indices) {
             val item = listeEtapesActuelle.removeAt(positionInitiale)
             listeEtapesActuelle.add(positionFinale, item)
+
+            // 🔁 Mise à jour des ordres
+            listeEtapesActuelle.forEachIndexed { index, etape ->
+                etape.ordre = index
+            }
+
             _etapes.value = listeEtapesActuelle
         }
     }
@@ -121,8 +160,14 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
 
 
 
-    fun enregistrerRecette(nom: String, imageUri: Uri?, ingredients: String, categorieNom: String){
-
+    fun enregistrerRecette(
+        nom: String,
+        imageUri: Uri?,
+        ingredients: String,
+        categorieNom: String,
+        estNouvelleRecette: Boolean,
+        idRecette: Long? = null
+    ){
         // Validation des étapes
         val etapes = _etapes.value
         if (nom.isBlank() || ingredients.isBlank() || categorieNom.isBlank() || imageUri == null) {
@@ -142,12 +187,15 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
 
         // Coroutine de validation recette existante et enregistrement
         viewModelScope.launch {
-            val recetteExistante = withContext(Dispatchers.IO) {
-                db.recetteDao().recetteParNom(nom)
-            }
-            if (recetteExistante != null) {
-                _message.postValue("Une recette avec ce nom existe déjà.")
-                return@launch
+            if (estNouvelleRecette) {
+                // Vérifier doublon par nom
+                val recetteExistante = withContext(Dispatchers.IO) {
+                    db.recetteDao().recetteParNom(nom)
+                }
+                if (recetteExistante != null) {
+                    _message.postValue("Une recette avec ce nom existe déjà.")
+                    return@launch
+                }
             }
 
             val categorieId = withContext(Dispatchers.IO) {
@@ -160,16 +208,21 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
 
             withContext(Dispatchers.IO) {
                 val recette = Recette(
+                    id = if (!estNouvelleRecette) idRecette!! else 0,
                     nomRecette = nom,
                     image = imageUri.toString(),
                     ingredients = ingredients,
                     categorieId = categorieId
                 )
-                db.recetteDao().insertRecetteAvecEtapes(recette, etapes)
+
+                if (estNouvelleRecette) {
+                    db.recetteDao().insertRecetteAvecEtapes(recette, _etapes.value ?: emptyList())
+                } else {
+                    db.recetteDao().updateRecetteAvecEtapes(recette, _etapes.value ?: emptyList())
+                }
             }
 
-            _message.postValue("Recette enregistrée avec succès")
-
+            _message.postValue("Recette ${if (estNouvelleRecette) "enregistrée" else "modifiée"} avec succès")
             _fermerActivity.postValue(true)
         }
     }

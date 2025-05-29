@@ -16,8 +16,6 @@ import com.moineaux.cuisto.R
 import com.moineaux.cuisto.data.AppDatabase
 import com.moineaux.cuisto.viewmodel.RecetteViewModel
 import kotlinx.coroutines.launch
-import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import android.widget.LinearLayout
 import com.bumptech.glide.Glide
 import com.moineaux.cuisto.data.Categorie
@@ -31,17 +29,15 @@ class AccueilActivity : AppCompatActivity() {
         setContentView(R.layout.activity_accueil)
 
 
-
+        // DEV ONLY
         //recetteViewModel.supprimerToutesLesRecettes()
         //recetteViewModel.insererRecetteUtilisateur()
 
 
 
         // Insertion des données fictives au démarrage via ViewModel
-        //recetteViewModel.insererDonneesMock()
         recetteViewModel.initialiserMockSiVide(
             onDone = {
-               // recetteViewModel.insererDonneesMock()
                 afficherRecettesMock()
                 afficherCategoriesDynamiquement()
             }
@@ -71,7 +67,7 @@ class AccueilActivity : AppCompatActivity() {
         // Logique à réutiliser pour la modification
         val btnAjouterRecette = findViewById<Button>(R.id.btnNouvelleRecette)
         btnAjouterRecette.setOnClickListener {
-            val intent = Intent(this, AjouterRecetteActivity::class.java)
+            val intent = Intent(this, AjouterOuEditerRecetteActivity::class.java)
             intent.putExtra("is_new_recette", true)
             intent.putExtra("recette_id", -1)
             startActivity(intent)

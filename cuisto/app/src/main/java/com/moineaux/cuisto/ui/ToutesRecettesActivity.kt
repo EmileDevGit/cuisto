@@ -2,20 +2,12 @@ package com.moineaux.cuisto.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
-import android.util.Log
 import android.widget.Button
 import android.view.KeyEvent
-import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
@@ -24,15 +16,9 @@ import com.bumptech.glide.Glide
 import com.moineaux.cuisto.R
 import com.moineaux.cuisto.data.AppDatabase
 import com.moineaux.cuisto.data.Categorie
-import com.moineaux.cuisto.repository.RecetteRepository
 import com.moineaux.cuisto.viewmodel.RecetteViewModel
 import com.moineaux.cuisto.viewmodel.RecetteViewModelFactory
-import com.moineaux.cuisto.data.MockData
-import com.moineaux.cuisto.data.Recette
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ToutesRecettesActivity : AppCompatActivity() {
 
@@ -48,7 +34,7 @@ class ToutesRecettesActivity : AppCompatActivity() {
         afficherCategoriesDynamiquement()
         val btnAjouter = findViewById<Button>(R.id.btn_ajouter)
         btnAjouter.setOnClickListener {
-            val intent = Intent(this, AjouterRecetteActivity::class.java)
+            val intent = Intent(this, AjouterOuEditerRecetteActivity::class.java)
             startActivity(intent)
         }
 

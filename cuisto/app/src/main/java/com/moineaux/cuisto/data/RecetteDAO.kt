@@ -31,12 +31,6 @@ interface RecetteDAO {
     @Delete
     suspend fun supprimer(recette: Recette)
 
-    // A UTILISER SUR LE BOUTON POUR SUPPRIMER
-//    if (!recette.isMock) {
-//        db.recetteDao().supprimer(recette)
-//    } else {
-//        Toast.makeText(context, "Impossible de supprimer cette recette par défaut.", Toast.LENGTH_SHORT).show()
-//    }
     @Query("SELECT * FROM Recette WHERE categorieId = :idCategorie")
     fun getRecettesParCategorie(idCategorie: Long): LiveData<List<Recette>>
     @Query("SELECT * FROM Recette WHERE isMock = 0")
@@ -55,5 +49,34 @@ interface RecetteDAO {
 
     @Query("SELECT * FROM Recette WHERE nomRecette = :nom")
     suspend fun recetteParNom(nom: String): Recette?
+
+    @Query("DELETE FROM Recette WHERE id = :idRecette")
+    suspend fun supprimerRecetteAvecId(idRecette: Long)
+
+    @Transaction
+    suspend fun updateRecetteAvecEtapes(recette: Recette, nouvellesEtapes: List<Etape>) {
+        update(recette)
+        supprimerEtapesParRecette(recette.id)
+
+        val etapesPrêtes = nouvellesEtapes.mapIndexed { index, etape ->
+            etape.copy(
+                ordre = index,
+                recetteId = recette.id
+            )
+        }
+
+        insererEtapes(etapesPrêtes)
+    }
+    @Update
+    suspend fun update(recette: Recette)
+
+    @Query("DELETE FROM Etape WHERE recetteId = :recetteId")
+    suspend fun supprimerEtapesParRecette(recetteId: Long)
+
+    @Insert
+    suspend fun insererEtapes(etapes: List<Etape>)
+
+
+
 
 }
