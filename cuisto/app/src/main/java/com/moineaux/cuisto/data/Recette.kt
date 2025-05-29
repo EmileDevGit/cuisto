@@ -4,8 +4,6 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-
-// ********* Clé étrangère de Categorie ******
 @Entity(
     foreignKeys = [ForeignKey(
         entity = Categorie::class,
@@ -14,7 +12,6 @@ import androidx.room.PrimaryKey
         onDelete = ForeignKey.CASCADE
     )]
 )
-// ************
 
 data class Recette(
     @PrimaryKey(autoGenerate = true)

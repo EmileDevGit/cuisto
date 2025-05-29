@@ -69,7 +69,6 @@ class AfficherRecetteDetailActivity : AppCompatActivity() {
             intention.putExtra("is_new_recette", false)
             intention.putExtra("recette_id", idRecette)
             startActivity(intention)
-            finish()
         }
 
         val btnSupprimerRecette: Button = findViewById(R.id.btnSupprimerCategorie)

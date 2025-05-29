@@ -136,11 +136,7 @@ class RecettesParCategorieActivity : AppCompatActivity() {
         }
 
     }
-    private fun ouvrirCategorie(nomCategorie: String) {
-        val intent = Intent(this, RecettesParCategorieActivity::class.java)
-        intent.putExtra("categorie", nomCategorie)
-        startActivity(intent)
-    }
+
     //    ******************** Barre des categorie dynamique
 
     private fun afficherCategoriesDynamiquement() {

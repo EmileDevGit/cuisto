@@ -20,13 +20,6 @@ class RecetteViewModel(application: Application) : AndroidViewModel(application)
     private val _messageRecetteVide = MutableLiveData<Boolean>()
     val messageRecetteVide : LiveData<Boolean> = _messageRecetteVide
 
-    fun supprimerToutesLesRecettes() {
-        Thread {
-            repository.db.recetteDao().supprimerToutesLesRecettes()
-            repository.db.categorieDao().supprimerToutesLesCategories()
-            //MockData.insererDonneesMock(repository.db)
-        }.start()
-    }
     private val repository = RecetteRepository(AppDatabase.getDatabase(application))
 
     // ******** Recettes regroupées par catégorie *************
@@ -67,11 +60,11 @@ class RecetteViewModel(application: Application) : AndroidViewModel(application)
 
     // *********** Force l’insertion des données mock (à utiliser avec prudence si déjà appelées) *****************
 
-    fun insererDonneesMock() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.insererDonneesMock()
-        }
-    }
+//    fun insererDonneesMock() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            repository.insererDonneesMock()
+//        }
+//    }
 
     fun initialiserMockSiVide(
         onDone: () -> Unit
@@ -88,26 +81,11 @@ class RecetteViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun insererRecetteUtilisateur(){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.insererRecetteUtilisateur()
-        }
-    }
-
     // *********** Récupère uniquement les recettes marquées comme "mock" *****************
 
     fun chargerRecettesMock(onResult: (List<Recette>) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             val recettes = repository.recupererRecettesMock()
-            withContext(Dispatchers.Main) {
-                onResult(recettes)
-            }
-        }
-    }
-
-    fun chargerToutesRecettes(onResult: (List<Recette>) -> Unit) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val recettes = repository.recupererToutesLesRecettes()
             withContext(Dispatchers.Main) {
                 onResult(recettes)
             }
@@ -122,5 +100,21 @@ class RecetteViewModel(application: Application) : AndroidViewModel(application)
         viewModelScope.launch(Dispatchers.IO) {
             repository.db.categorieDao().supprimerCategorie(nomCategorie)
         }
+    }
+
+
+
+
+    // DEV TOOLS - DO NOT DELETE UNLESS DEPLOY
+    fun insererRecetteUtilisateur(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insererRecetteUtilisateur()
+        }
+    }
+    fun supprimerToutesLesRecettes() {
+        Thread {
+            repository.db.recetteDao().supprimerToutesLesRecettes()
+            repository.db.categorieDao().supprimerToutesLesCategories()
+        }.start()
     }
 }

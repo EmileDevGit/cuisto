@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-// REMPLACER Article::class PAR LE NOM DE VOTRE CLASSE
+
 @Database(entities = [Recette::class, Etape::class, Categorie::class], version = 33)
 abstract class AppDatabase : RoomDatabase() {
 

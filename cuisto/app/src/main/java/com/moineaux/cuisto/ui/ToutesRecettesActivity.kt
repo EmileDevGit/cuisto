@@ -119,12 +119,7 @@ class ToutesRecettesActivity : AppCompatActivity() {
                             val intent = Intent(this@ToutesRecettesActivity, AfficherRecetteDetailActivity::class.java)
                             intent.putExtra("recetteid", recette.id)
                             startActivity(intent)
-//                            finish()
                         }
-
-
-
-
 
                         nom.text = recette.nomRecette
 
@@ -178,12 +173,6 @@ class ToutesRecettesActivity : AppCompatActivity() {
                 layoutCategories.addView(bloc)
             }
         }
-    }
-
-    private fun ouvrirCategorie(nomCategorie: String) {
-        val intent = Intent(this, RecettesParCategorieActivity::class.java)
-        intent.putExtra("categorie", nomCategorie)
-        startActivity(intent)
     }
 }
 

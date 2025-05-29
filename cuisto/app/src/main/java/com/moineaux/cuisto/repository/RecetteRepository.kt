@@ -8,65 +8,8 @@ import com.moineaux.cuisto.data.Recette
 
 class RecetteRepository(val db: AppDatabase) {
 
-    suspend fun insererDonneesMock() {
-        if (db.recetteDao().getRecettesNonMock().isEmpty()) {
 
-
-            val pizzaId = getOrCreateCategorie("Pizza", "icone_pizza_cat")
-            val saladeId = getOrCreateCategorie("Salade", "icone_salade_cat")
-            val burgerId = getOrCreateCategorie("Burger", "icone_burger_cat")
-            val patesId = getOrCreateCategorie("Pâtes", "icone_pates_cat")
-            val tacosId = getOrCreateCategorie("Tacos", "icone_tacos_cat")
-            //
-
-
-            // DONNES MOCK
-
-            db.recetteDao().insertRecetteAvecEtapes(
-                Recette(nomRecette = "Pizza chèvre miel noix", image = "pizzachevremiel", ingredients = "Chèvre, miel, noix", categorieId = pizzaId,isMock = 1),
-                listOf(
-                    Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four"),
-                    Etape(recetteId = 1, ordre = 2, description = "Étaler la pâte"),
-                    Etape(recetteId = 1, ordre = 3, description ="Ajouter les ingrédients"),
-                    Etape(recetteId = 1, ordre = 4, description = "Cuire 15 min")
-                )
-            )
-
-            db.recetteDao().insertRecetteAvecEtapes(
-                Recette(nomRecette = "Salade de quinoa", image = "saladequinoa", ingredients = "Quinoa, légumes", categorieId = saladeId,isMock = 1),
-                listOf(
-                    Etape(recetteId = 1, ordre = 1, description = "Préchauffer le four"),
-                    Etape(recetteId = 1, ordre = 2, description = "Couper les légumes"),
-                    Etape(recetteId = 1, ordre = 3, description = "Mélanger"),
-                    Etape(recetteId = 1, ordre = 4, description = "Assaisonner")
-                )
-            )
-
-            db.recetteDao().insertRecetteAvecEtapes(
-                Recette(nomRecette = "Burger steak fromage", image = "burgersteakfromage", ingredients = "Steak, fromage, pain", categorieId = burgerId,isMock = 1),
-                listOf(
-                    Etape(recetteId = 1, ordre = 1, description = "Cuire le steak"),
-                    Etape(recetteId = 1, ordre = 2, description = "Griller le pain"),
-                    Etape(recetteId = 1, ordre = 3, description = "Monter le burger"),
-                    Etape(recetteId = 1, ordre = 4, description = "Servir chaud")
-                )
-            )
-
-            db.recetteDao().insertRecetteAvecEtapes(
-                Recette(nomRecette = "Pâtes aux champignons", image = "pateschampignons", ingredients = "Pâtes, champignons, crème", categorieId = patesId,isMock = 1),
-                listOf(
-                    Etape(recetteId = 1, ordre = 1, description = "Faire cuire les pâtes"),
-                    Etape(recetteId = 1, ordre = 2, description ="Sauter les champignons"),
-                    Etape(recetteId = 1, ordre = 3, description = "Ajouter la crème"),
-                    Etape(recetteId = 1, ordre = 4, description = "Mélanger le tout")
-                )
-            )
-
-            // FIN DONNES MOCK
-
-        }
-    }
-
+    // POUR DEV - SIMULATION DES DONNÉES UTILISATEUR
     suspend fun insererRecetteUtilisateur() {
 
         val pizzaId = getOrCreateCategorie("Pizza", "icone_pizza_cat")
