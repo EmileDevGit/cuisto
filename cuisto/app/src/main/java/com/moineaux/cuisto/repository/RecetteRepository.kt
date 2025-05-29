@@ -1,5 +1,6 @@
 package com.moineaux.cuisto.repository
 
+import androidx.lifecycle.LiveData
 import com.moineaux.cuisto.data.AppDatabase
 import com.moineaux.cuisto.data.Categorie
 import com.moineaux.cuisto.data.Recette
@@ -7,26 +8,14 @@ import com.moineaux.cuisto.data.Recette
 class RecetteRepository(val db: AppDatabase) {
 
     suspend fun insererDonneesMock() {
-        if (db.recetteDao().toutRecuperer().isEmpty()) {
+        if (db.recetteDao().getRecettesNonMock().isEmpty()) {
 
 
-
-            val pizzaExistante = db.categorieDao().getCategorieParNom("Pizza")
-            val pizzaId = pizzaExistante?.id ?: db.categorieDao().insert(Categorie(nom = "Pizza"))
-
-            val saladeExistante = db.categorieDao().getCategorieParNom("Salade")
-            val saladeId = saladeExistante?.id ?: db.categorieDao().insert(Categorie(nom = "Salade"))
-
-            val burgerExistante = db.categorieDao().getCategorieParNom("Burger")
-            val burgerId = burgerExistante?.id ?: db.categorieDao().insert(Categorie(nom = "Burger"))
-
-            val patesExistante = db.categorieDao().getCategorieParNom("Pâtes")
-            val patesId = patesExistante?.id ?: db.categorieDao().insert(Categorie(nom = "Pâtes"))
-
-            val tacosExistante = db.categorieDao().getCategorieParNom("Tacos")
-            val tacosId = tacosExistante?.id ?: db.categorieDao().insert(Categorie(nom = "Tacos"))
-
-
+            val pizzaId = getOrCreateCategorie("Pizza", "icone_pizza_cat")
+            val saladeId = getOrCreateCategorie("Salade", "icone_salade_cat")
+            val burgerId = getOrCreateCategorie("Burger", "icone_burger_cat")
+            val patesId = getOrCreateCategorie("Pâtes", "icone_pates_cat")
+            val tacosId = getOrCreateCategorie("Tacos", "icone_tacos_cat")
 
             db.recetteDao().insertRecetteAvecEtapes(
                 Recette(
@@ -384,4 +373,12 @@ class RecetteRepository(val db: AppDatabase) {
     suspend fun recupererRecettesMock(): List<Recette> {
         return db.recetteDao().recupererRecettesMock()
     }
+    fun getRecettesParCategorie(idCategorie: Long): LiveData<List<Recette>> {
+        return db.recetteDao().getRecettesParCategorie(idCategorie)
+    }
+    private suspend fun getOrCreateCategorie(nom: String, image: String): Long {
+        val existante = db.categorieDao().getCategorieParNom(nom)
+        return existante?.id ?: db.categorieDao().insert(Categorie(nom = nom, image = image))
+    }
+
 }

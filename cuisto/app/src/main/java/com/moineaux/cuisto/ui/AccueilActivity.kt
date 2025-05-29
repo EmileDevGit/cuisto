@@ -14,19 +14,17 @@ import com.moineaux.cuisto.R
 import com.moineaux.cuisto.data.AppDatabase
 import com.moineaux.cuisto.viewmodel.RecetteViewModel
 import kotlinx.coroutines.launch
+import android.widget.LinearLayout
+import com.bumptech.glide.Glide
+import com.moineaux.cuisto.data.Categorie
 
 class AccueilActivity : AppCompatActivity() {
 
     private val recetteViewModel: RecetteViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_accueil)
-
-        // Insertion des données fictives au démarrage via ViewModel
-        recetteViewModel.insererDonneesMock()
-        recetteViewModel.initialiserMockSiVide()
 
         val boutonToutesRecettes = findViewById<Button>(R.id.btn_toutes_recettes)
         boutonToutesRecettes.setOnClickListener {
@@ -34,14 +32,56 @@ class AccueilActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        findViewById<ImageView>(R.id.cat_pizza).setOnClickListener { ouvrirCategorie("Pizza") }
-        findViewById<ImageView>(R.id.cat_salade).setOnClickListener { ouvrirCategorie("Salade") }
-        findViewById<ImageView>(R.id.cat_tacos).setOnClickListener { ouvrirCategorie("Tacos") }
-        findViewById<ImageView>(R.id.cat_gateau).setOnClickListener { ouvrirCategorie("Gateau") }
-        findViewById<ImageView>(R.id.cat_burger).setOnClickListener { ouvrirCategorie("Burger") }
-        findViewById<ImageView>(R.id.cat_pates).setOnClickListener { ouvrirCategorie("Pâtes") }
+        // *********** On initialise les données mock si besoin PUIS on affiche ************
 
-        afficherRecettesMock()
+        recetteViewModel.initialiserMockSiVide {
+            afficherRecettesMock()
+            afficherCategoriesDynamiquement()
+        }
+    }
+
+//    ******************** Barre des categorie dynamique **************************
+
+    private fun afficherCategoriesDynamiquement() {
+        val layoutCategories = findViewById<LinearLayout>(R.id.zone_dynamique_categories)
+        val db = AppDatabase.getDatabase(applicationContext)
+
+        lifecycleScope.launch {
+            val categories: List<Categorie> = db.categorieDao().getToutesLesCategories()
+
+            layoutCategories.removeAllViews()
+            val inflater = layoutInflater
+
+            for (cat in categories) {
+                val bloc = inflater.inflate(R.layout.item_categorie, layoutCategories, false)
+
+                val image = bloc.findViewById<ImageView>(R.id.image_categorie)
+                val texte = bloc.findViewById<TextView>(R.id.texte_categorie)
+
+                // ************* Nom de la catégorie ******************
+
+                texte.text = cat.nom
+
+                // ************** Image (depuis drawable) **********************
+
+                val resId = resources.getIdentifier(cat.image, "drawable", packageName)
+                if (resId != 0) {
+                    Glide.with(this@AccueilActivity).load(resId).into(image)
+                } else {
+                    image.setImageResource(R.drawable.defaut)
+                }
+
+                // ************** Clique sur la catégorie → ouvre la page des recettes ****************
+
+                bloc.setOnClickListener {
+                    val intent = Intent(this@AccueilActivity, RecettesParCategorie::class.java)
+                    intent.putExtra("categorie", cat.nom)
+                    startActivity(intent)
+                }
+
+                layoutCategories.addView(bloc)
+            }
+        }
     }
 
     private fun ouvrirCategorie(nomCategorie: String) {

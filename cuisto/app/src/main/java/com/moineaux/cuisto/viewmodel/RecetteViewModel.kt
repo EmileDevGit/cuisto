@@ -2,6 +2,7 @@ package com.moineaux.cuisto.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.moineaux.cuisto.data.AppDatabase
 import com.moineaux.cuisto.data.MockData
@@ -15,34 +16,43 @@ import kotlinx.coroutines.withContext
 
 class RecetteViewModel(application: Application) : AndroidViewModel(application) {
 
-    //  ********************* Repository avec accès à la base de données *********************
-
     private val repository = RecetteRepository(AppDatabase.getDatabase(application))
 
-    // ******************* Stocke les recettes regroupées par catégorie *********************
+    // ******** Recettes regroupées par catégorie *************
 
     private val _recettesParCategorie = MutableStateFlow<Map<String, List<Recette>>>(emptyMap())
     val recettesParCategorie: StateFlow<Map<String, List<Recette>>> = _recettesParCategorie
 
-    // **************** Prend toutes les recettes, les organise par type (comme "Entrées", "Desserts"...) **************
+    // ******** Chargement des recettes regroupées par nom de catégorie ************
 
     fun chargerRecettes() {
         viewModelScope.launch {
             val toutesRecettes = repository.recupererToutesLesRecettes()
-
             val regroupées = withContext(Dispatchers.IO) {
-                toutesRecettes.groupBy { recette ->
-                    // Cherche le nom de la catégorie par son ID, sinon "Autre"
-                    repository.db.categorieDao().getNomCategorieParId(recette.categorieId) ?: "Autre"
+                toutesRecettes.groupBy {
+                    repository.db.categorieDao().getNomCategorieParId(it.categorieId) ?: "Autre"
                 }
             }
-// *****************  J’envoie une nouvelle liste de recettes classées par catégorie, pour que l’écran puisse les afficher ***************
-
             _recettesParCategorie.emit(regroupées)
         }
     }
 
-    // ******************** Insère les recettes mock (fictives) *****************************
+    // *********** Insère les données mock uniquement si recettes ET catégories sont vides *************
+
+    fun initialiserMockSiVide(onDone: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val recettes = repository.recupererToutesLesRecettes()
+            val categories = repository.db.categorieDao().getToutesLesCategories()
+            if (recettes.isEmpty() && categories.isEmpty()) {
+                MockData.insererDonneesMock(repository.db)
+            }
+            withContext(Dispatchers.Main) {
+                onDone()
+            }
+        }
+    }
+
+    // *********** Force l’insertion des données mock (à utiliser avec prudence si déjà appelées) *****************
 
     fun insererDonneesMock() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -50,25 +60,27 @@ class RecetteViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    // ********************* Insère les recettes mock uniquement si la base est vide **********************
+    // *********** Récupère uniquement les recettes marquées comme "mock" *****************
 
-    fun initialiserMockSiVide() {
+    fun chargerRecettesMock(onResult: (List<Recette>) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val vide = repository.recupererToutesLesRecettes().isEmpty()
-            if (vide) {
-                MockData.insererDonneesMock(repository.db)
+            val recettes = repository.recupererRecettesMock()
+            withContext(Dispatchers.Main) {
+                onResult(recettes)
             }
         }
     }
 
-    // Récupère les recettes mock et appelle un callback avec le résultat - Unit : fonction qui retourne rien
-    fun chargerRecettesMock(onResult: (List<Recette>) -> Unit) {
-//        On lance une coroutine pour faire le travail en arrière-plan, sans bloquer l'application
+    fun chargerToutesRecettes(onResult: (List<Recette>) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-//            On demande au repository de nous donner les recettes fictives (mock)
-            val recettes = repository.recupererRecettesMock()
-//            On utilise le callback (la fonction passée en paramètre) pour envoyer les recettes à l’endroit qui a appelé cette fonction
-            onResult(recettes)
+            val recettes = repository.recupererToutesLesRecettes()
+            withContext(Dispatchers.Main) {
+                onResult(recettes)
+            }
         }
+    }
+
+    fun getRecettesParCategorie(idCategorie: Long): LiveData<List<Recette>> {
+        return repository.getRecettesParCategorie(idCategorie)
     }
 }
