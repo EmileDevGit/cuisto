@@ -19,5 +19,6 @@ class IntroActivity : AppCompatActivity() {
             startActivity(intention)
             finish()
         }
+
     }
 }

@@ -3,7 +3,6 @@ package com.moineaux.cuisto.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -14,7 +13,6 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.moineaux.cuisto.R
 import com.moineaux.cuisto.viewmodel.AfficherRecetteDetailViewModel
-import com.bumptech.glide.Glide
 
 class AfficherRecetteDetailActivity : AppCompatActivity() {
 

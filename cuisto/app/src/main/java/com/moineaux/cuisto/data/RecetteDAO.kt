@@ -1,5 +1,6 @@
 package com.moineaux.cuisto.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -36,6 +37,10 @@ interface RecetteDAO {
 //    } else {
 //        Toast.makeText(context, "Impossible de supprimer cette recette par défaut.", Toast.LENGTH_SHORT).show()
 //    }
+    @Query("SELECT * FROM Recette WHERE categorieId = :idCategorie")
+    fun getRecettesParCategorie(idCategorie: Long): LiveData<List<Recette>>
+    @Query("SELECT * FROM Recette WHERE isMock = 0")
+    suspend fun getRecettesNonMock(): List<Recette>
 
     @Transaction
     suspend fun insertRecetteAvecEtapes(recette: Recette, listeEtapes: List<Etape>) {

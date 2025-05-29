@@ -6,9 +6,6 @@ import androidx.room.PrimaryKey
 @Entity()
 data class Categorie(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
-    var nom: String
-) {
-
-
-
-}
+    val nom: String,
+    val image: String
+)

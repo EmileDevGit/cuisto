@@ -23,4 +23,10 @@ interface CategorieDAO {
 
     @Query("SELECT DISTINCT nom FROM Categorie")
     suspend fun getAllNomsCategories(): List<String>
+
+    @Query("SELECT DISTINCT * FROM Categorie")
+    suspend fun getToutesLesCategories(): List<Categorie>
+
+
+
 }

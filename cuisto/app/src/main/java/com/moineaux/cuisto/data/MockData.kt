@@ -3,18 +3,17 @@ package com.moineaux.cuisto.data
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 object MockData {
-    fun insererDonneesMock(db: AppDatabase) {
-        CoroutineScope(Dispatchers.IO).launch {
-
-            // ********************** Si vide il remplie avec les donnees du Mock ***********************
+    suspend fun insererDonneesMock(db: AppDatabase) {
+        withContext(Dispatchers.IO) {
             if (db.recetteDao().toutRecuperer().isEmpty()) {
 
-                val pizzaId = db.categorieDao().insert(Categorie(nom = "Pizza"))
-                val saladeId = db.categorieDao().insert(Categorie(nom = "Salade"))
-                val burgerId = db.categorieDao().insert(Categorie(nom = "Burger"))
-                val patesId = db.categorieDao().insert(Categorie(nom = "Pâtes"))
+                val pizzaId = db.categorieDao().insert(Categorie(nom = "Pizza", image = "icone_pizza_cat"))
+                val saladeId = db.categorieDao().insert(Categorie(nom = "Salade", image = "icone_salade_cat"))
+                val burgerId = db.categorieDao().insert(Categorie(nom = "Burger", image = "icone_burger_cat"))
+                val patesId = db.categorieDao().insert(Categorie(nom = "Pâtes", image = "icone_pates_cat"))
 
                 db.recetteDao().insertRecetteAvecEtapes(
                     Recette(nomRecette = "Pizza chèvre miel noix", image = "pizzachevremiel", ingredients = "Chèvre, miel, noix", categorieId = pizzaId,isMock = 1),

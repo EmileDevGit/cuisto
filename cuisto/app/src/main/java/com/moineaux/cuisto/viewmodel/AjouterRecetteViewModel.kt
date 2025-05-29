@@ -152,7 +152,7 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
 
             val categorieId = withContext(Dispatchers.IO) {
                 val categorie = db.categorieDao().getCategorieParNom(categorieNom)
-                    ?: Categorie(nom = categorieNom).also {
+                    ?: Categorie(nom = categorieNom, image = "defaut").also {
                         it.id = db.categorieDao().insert(it)
                     }
                 categorie.id

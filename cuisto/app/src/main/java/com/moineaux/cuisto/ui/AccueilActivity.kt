@@ -18,19 +18,35 @@ import com.moineaux.cuisto.viewmodel.RecetteViewModel
 import kotlinx.coroutines.launch
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import android.widget.LinearLayout
+import com.bumptech.glide.Glide
+import com.moineaux.cuisto.data.Categorie
 
 class AccueilActivity : AppCompatActivity() {
 
     private val recetteViewModel: RecetteViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_accueil)
 
+
+
+        //recetteViewModel.supprimerToutesLesRecettes()
+        //recetteViewModel.insererRecetteUtilisateur()
+
+
+
         // Insertion des données fictives au démarrage via ViewModel
-        recetteViewModel.insererDonneesMock()
-        recetteViewModel.initialiserMockSiVide()
+        //recetteViewModel.insererDonneesMock()
+        recetteViewModel.initialiserMockSiVide(
+            onDone = {
+               // recetteViewModel.insererDonneesMock()
+                afficherRecettesMock()
+                afficherCategoriesDynamiquement()
+            }
+        )
+
         val barreRecherche: EditText = findViewById(R.id.champ_recherche)
         barreRecherche.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -43,20 +59,6 @@ class AccueilActivity : AppCompatActivity() {
             }
             return@setOnKeyListener false
         }
-        // *********************************** Vide la base avant tout  ------------ ATTENTION A RETIRER POUR LA PRODUCTION ****************************
-//        Thread {
-//            db.recetteDao().supprimerToutesLesRecettes()
-//            db.categorieDao().supprimerToutesLesCategories()
-//
-//            // ******************************** Insérer les données mock ******************************************
-//            MockData.insererDonneesMock(db)
-//        }.start()
-
-        // ************ Ecouteur bouton recette *********************
-
-
-
-
 
         val boutonToutesRecettes = findViewById<Button>(R.id.btn_toutes_recettes)
         boutonToutesRecettes.setOnClickListener {
@@ -66,7 +68,7 @@ class AccueilActivity : AppCompatActivity() {
         }
 
 
-                                // Logique à réutiliser pour la modification
+        // Logique à réutiliser pour la modification
         val btnAjouterRecette = findViewById<Button>(R.id.btnNouvelleRecette)
         btnAjouterRecette.setOnClickListener {
             val intent = Intent(this, AjouterRecetteActivity::class.java)
@@ -74,23 +76,50 @@ class AccueilActivity : AppCompatActivity() {
             intent.putExtra("recette_id", -1)
             startActivity(intent)
         }
+    }
 
-        // ************ Ecouteur sur images categorie *********************
+//    ******************** Barre des categorie dynamique **************************
 
-        // CLIC SUR CATEGORIE PIZZA
-        findViewById<ImageView>(R.id.cat_pizza).setOnClickListener {
-            ouvrirCategorie("Pizza")
+    private fun afficherCategoriesDynamiquement() {
+        val layoutCategories = findViewById<LinearLayout>(R.id.zone_dynamique_categories)
+        val db = AppDatabase.getDatabase(applicationContext)
+
+        lifecycleScope.launch {
+            val categories: List<Categorie> = db.categorieDao().getToutesLesCategories()
+
+            layoutCategories.removeAllViews()
+            val inflater = layoutInflater
+
+            for (cat in categories) {
+                val bloc = inflater.inflate(R.layout.item_categorie, layoutCategories, false)
+
+                val image = bloc.findViewById<ImageView>(R.id.image_categorie)
+                val texte = bloc.findViewById<TextView>(R.id.texte_categorie)
+
+                // ************* Nom de la catégorie ******************
+
+                texte.text = cat.nom
+
+                // ************** Image (depuis drawable) **********************
+
+                val resId = resources.getIdentifier(cat.image, "drawable", packageName)
+                if (resId != 0) {
+                    Glide.with(this@AccueilActivity).load(resId).into(image)
+                } else {
+                    image.setImageResource(R.drawable.defaut)
+                }
+
+                // ************** Clique sur la catégorie → ouvre la page des recettes ****************
+
+                bloc.setOnClickListener {
+                    val intent = Intent(this@AccueilActivity, RecettesParCategorie::class.java)
+                    intent.putExtra("categorie", cat.nom)
+                    startActivity(intent)
+                }
+
+                layoutCategories.addView(bloc)
+            }
         }
-
-        findViewById<ImageView>(R.id.cat_pizza).setOnClickListener { ouvrirCategorie("Pizza") }
-        findViewById<ImageView>(R.id.cat_salade).setOnClickListener { ouvrirCategorie("Salade") }
-        findViewById<ImageView>(R.id.cat_tacos).setOnClickListener { ouvrirCategorie("Tacos") }
-        findViewById<ImageView>(R.id.cat_gateau).setOnClickListener { ouvrirCategorie("Gateau") }
-        findViewById<ImageView>(R.id.cat_burger).setOnClickListener { ouvrirCategorie("Burger") }
-        findViewById<ImageView>(R.id.cat_pates).setOnClickListener { ouvrirCategorie("Pâtes") }
-
-        afficherRecettesMock()
-        // afficherRecettes(db)
     }
 
     private fun ouvrirCategorie(nomCategorie: String) {
