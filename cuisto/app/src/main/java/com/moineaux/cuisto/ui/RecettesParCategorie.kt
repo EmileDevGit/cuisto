@@ -36,7 +36,7 @@ class RecettesParCategorie : AppCompatActivity() {
         // On récupère le nom de la catégorie envoyée par l’écran précédent
         val nomCategorie = intent.getStringExtra("categorie") ?: return
 
-        // On affiche ce nom dans le bouton bleu
+        // On affiche ce nom dans le bouton marron au dessus de l'image --- activity_recettes_par_categorie.xml
         findViewById<TextView>(R.id.texte_categorie).text = nomCategorie
 
         // On initialise la base de données et le ViewModel
