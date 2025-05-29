@@ -72,9 +72,9 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
             }
         }
     }
-    fun reinitialiserImage() {
-        _imageUri.value = null
-    }
+//    fun reinitialiserImage() {
+//        _imageUri.value = null
+//    }
 
 
 
@@ -169,6 +169,7 @@ class AjouterRecetteViewModel(application: Application) : AndroidViewModel(appli
             }
 
             _message.postValue("Recette enregistrée avec succès")
+
             _fermerActivity.postValue(true)
         }
     }

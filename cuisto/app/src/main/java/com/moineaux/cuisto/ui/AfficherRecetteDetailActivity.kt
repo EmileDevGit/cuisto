@@ -37,37 +37,29 @@ class AfficherRecetteDetailActivity : AppCompatActivity() {
         val ivLogo: ImageView = findViewById(R.id.imgVLogoRecetteDetail)
         val btnAjouterRecette: Button = findViewById(R.id.btnAjouteRecetteDetail)
         val barreRecherche: EditText = findViewById(R.id.etRechercheRecetteDetail)
-        barreRecherche.setOnEditorActionListener { v, idAction, evenement ->
-            // Verifier si la touche entree est tape ou meme pour le clavier virtuel
-            if (idAction == EditorInfo.IME_ACTION_SEARCH ||
-                idAction == EditorInfo.IME_ACTION_DONE ||
-                (evenement != null && evenement.keyCode == KeyEvent.KEYCODE_ENTER && evenement.action == KeyEvent.ACTION_DOWN)) {
-
+        barreRecherche.setOnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 val itemRechercher = barreRecherche.text.toString()
                 val intention = Intent(this, ToutesRecettesActivity::class.java)
                 intention.putExtra("itemRechercher", itemRechercher)
                 startActivity(intention)
-
-                // Cacher clavier virtuel
-                val imm = getSystemService(INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
-                imm.hideSoftInputFromWindow(v.windowToken, 0)
-
-                return@setOnEditorActionListener true // Consommer l evenement
+                finish()
+                return@setOnKeyListener true
             }
-            return@setOnEditorActionListener false // laisser le system avec les autres actions
+            return@setOnKeyListener false
         }
 
         rvEtapes.adapter = adapterEtape
 
         ivLogo.setOnClickListener {
             val intention = Intent(this, AccueilActivity::class.java)
-            startActivity(intention)
+//            startActivity(intention)
             finish()
         }
         btnAjouterRecette.setOnClickListener {
             val intention = Intent(this, AjouterRecetteActivity::class.java)
             startActivity(intention)
-            finish()
+//            finish()
         }
 
         recetteDetailViewModel.ingredientsRecetteDetail.observe(this) { ingredients ->

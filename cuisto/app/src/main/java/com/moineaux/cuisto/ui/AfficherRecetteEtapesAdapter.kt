@@ -39,7 +39,7 @@ class AfficherRecetteEtapesAdapter :
 
     override fun onBindViewHolder(holder: EtapeViewHolder, position: Int) {
         val etape = getItem(position)
-        val etapeNumero = etape.ordre.toString() + ". "
+        val etapeNumero = (etape.ordre + 1).toString() + ". "
         holder.tvEtape.text = etapeNumero + etape.description
     }
 }

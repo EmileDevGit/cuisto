@@ -26,7 +26,7 @@ interface RecetteDAO {
     @Query("SELECT * FROM Recette WHERE isMock = 1")
     suspend fun recupererRecettesMock(): List<Recette>
 
-    // « Cette fonction peut être suspendue (pause) et reprise plus tard. Elle doit être appelée dans une coroutine (asynchrone). »
+    // Cette fonction peut être suspendue (pause) et reprise plus tard. Elle doit être appelée dans une coroutine (asynchrone)
     @Delete
     suspend fun supprimer(recette: Recette)
 
@@ -36,7 +36,6 @@ interface RecetteDAO {
 //    } else {
 //        Toast.makeText(context, "Impossible de supprimer cette recette par défaut.", Toast.LENGTH_SHORT).show()
 //    }
-
 
     @Transaction
     suspend fun insertRecetteAvecEtapes(recette: Recette, listeEtapes: List<Etape>) {

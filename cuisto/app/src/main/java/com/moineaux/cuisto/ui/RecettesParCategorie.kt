@@ -47,7 +47,7 @@ class RecettesParCategorie : AppCompatActivity() {
         }
 
         // On recupere le nom de la categorie passe
-        //Pas Besoin d'afficher le nom de la categorie
+        // Pas Besoin d'afficher le nom de la categorie
 //        val nomCategorie = intent.getStringExtra("categorie") ?: "Inconnue"
 //        findViewById<TextView>(R.id.texte_categorie).text = "CATEGORIE / $nomCategorie"
         // CLIC SUR CATEGORIE PIZZA

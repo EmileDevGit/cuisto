@@ -2,6 +2,7 @@ package com.moineaux.cuisto.ui
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
@@ -204,6 +205,8 @@ class AjouterRecetteActivity() : AppCompatActivity() {
 
         ajouterRecetteViewModel.fermerActivity.observe(this) { recetteSaved ->
             if (recetteSaved == true) {
+                val intent = Intent(this, ToutesRecettesActivity::class.java)
+                startActivity(intent)
                 finish()
             }
         }
