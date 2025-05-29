@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bouton_intro_explorer">Explorer</string>
+    <string name="question_accueil">Que vas-tu cuisiner aujourd’hui ?</string>
+    <string name="barre_recherche_indice">Recherche une recette ...</string>
+    <string name="bouton_creer_recette_accueil">Créons ta recette 😉</string>
+    <string name="bouton_toute_recette_accueil">Toutes les recettes</string>
+    <string name="bouton_signe_plus">+</string>
+    <string name="textview_ingredients_recetteDetail">Les Ingrédients</string>
+    <string name="textview_Etapes_recetteDetail">Les étapes de la préparation</string>
+    <string name="textview_categorie_RecetteDetail">Categorie |</string>
+</resources>

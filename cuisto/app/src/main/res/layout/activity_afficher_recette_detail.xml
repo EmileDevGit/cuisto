@@ -12,7 +12,7 @@
         android:layout_width="61dp"
         android:layout_height="56dp"
         android:background="@drawable/bouton_arrondi"
-        android:text="+"
+        android:text="@string/bouton_signe_plus"
         android:textColor="@color/blanc"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
         android:layout_marginEnd="90dp"
         android:background="@drawable/fond_champ_recherche"
         android:drawableStart="@android:drawable/ic_menu_search"
-        android:hint="Recherche une recette ..."
+        android:hint="@string/barre_recherche_indice"
         android:imeOptions="actionSearch"
         android:singleLine="true"
         android:inputType="text"
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="15dp"
-        android:text="Les Ingrédients"
+        android:text="@string/textview_ingredients_recetteDetail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNomRecetteDetail" />
 
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:text="Les étapes de la préparation"
+        android:text="@string/textview_Etapes_recetteDetail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollVRecetteDetail" />
 
@@ -141,7 +141,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:text="Categorie | "
+        android:text="@string/textview_categorie_RecetteDetail"
         android:textColor="#AAAAAA"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

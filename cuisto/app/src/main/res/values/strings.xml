@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">Cuisto</string>
-    <string name="logo">Logo Cuisto</string>
+    <string name="app_name" translatable="false">Cuisto</string>
+    <string name="logo" translatable="false">Logo Cuisto</string>
+    <string name="bouton_intro_explorer">Explore</string>
+    <string name="question_accueil">What will you cook today ?</string>
+    <string name="barre_recherche_indice">Search a recipe ...</string>
+    <string name="bouton_creer_recette_accueil">Make your recipe 😉</string>
+    <string name="bouton_toute_recette_accueil">All recipes</string>
+    <string name="bouton_signe_plus">+</string>
+    <string name="textview_ingredients_recetteDetail">The Ingredients</string>
+    <string name="textview_Etapes_recetteDetail">The preparation steps</string>
+    <string name="textview_categorie_RecetteDetail">Category |</string>
 
 </resources>

@@ -60,6 +60,10 @@ class ToutesRecettesActivity : AppCompatActivity() {
             finish()
         }
 
+        viewModel.messageRecetteVide.observe(this) { message ->
+            Toast.makeText(this, "Aucun Recette trouvé", Toast.LENGTH_LONG).show()
+        }
+
 
         var filtre = intent.getStringExtra("itemRechercher")
 
