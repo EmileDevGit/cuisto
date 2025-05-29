@@ -21,9 +21,13 @@ est disponible dans le fichier `analyse.md`
 | :--- | :--- |
 | Émile       | Ajouter / Modifier/Supprimer une recette|
 | Émile       | Stockage dans une base de donnée locale SQL|
-| Kelly       | Afficher toutes les recettes |
-| Kelly       | Recherche par filtre (nom, ingrédients, catégorie, ...)|
-| Kristopher  | Ajouter / Modifier / Supprimer une catégorie|
+| Kelly       | Conception maquette |
+| Kelly       | Introduction |
+| Kelly       | Remplissage de la base de donnee + Compression images |
+| Kelly       | Accueil + Bloc de categorie 'Bas de page' dynamique |
+| Kelly       | Toutes les recettes |
+| Kelly       | Recette par categorie |
+| Kristopher  | Barre de recherche, I18n|
 | Kristopher  | Afficher une recette en détail|
 
 
@@ -37,29 +41,24 @@ est disponible dans le fichier `analyse.md`
     erDiagram
     "CATÉGORIE" ||--|{ RECETTE : appartenir
     "CATÉGORIE"{
-        int id
+        long id
         string nom
+        string image
     }
-    RECETTE ||--|{ "INGRÉDIENT" : avoir
     RECETTE{
-        int id
-        string titre
-        string imageURL
-        string description
-        string tempsPreparation
-        int portions
-        int id_categorie
-    }
-    "INGRÉDIENT"{
-        int id
-        string nom
-        int id_recette
+        long id
+        string nomRecette
+        string image
+        string ingredients
+        long categorieId
+        int isMock
     }
     "ÉTAPE" }|--|| RECETTE : a
     "ÉTAPE"{
-        int id
-        int numero_etape
+        long id
+        long recetteId
+        int ordre
         string description
-        int id_recette
+        
     }
 ```

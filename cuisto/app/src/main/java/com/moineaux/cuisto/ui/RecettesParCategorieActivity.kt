@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.widget.Button
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -62,6 +63,12 @@ class RecettesParCategorieActivity : AppCompatActivity() {
                 }
                 .setNegativeButton(getString(R.string.bouton_annuler_AjouterRecette), null)
                 .show()
+        }
+
+        val btnAjouterRecette: Button = findViewById(R.id.btn_ajouter)
+        btnAjouterRecette.setOnClickListener {
+            val intention = Intent(this, AjouterOuEditerRecetteActivity::class.java)
+            startActivity(intention)
         }
 
 //        *************** LOGO POUR REVENIR SUR LA PAGE D'ACCUEIL ************
