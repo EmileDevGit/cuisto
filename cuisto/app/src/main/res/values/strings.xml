@@ -9,6 +9,24 @@
     <string name="bouton_signe_plus">+</string>
     <string name="textview_ingredients_recetteDetail">The Ingredients</string>
     <string name="textview_Etapes_recetteDetail">The preparation steps</string>
-    <string name="textview_categorie_RecetteDetail">Category |</string>
+    <string name="textview_categorie_RecetteDetail">"Category | "</string>
+    <string name="editText_nomRecette_ajouterRecette">Name your recipe</string>
+    <string name="editText_categorie_ajouterRecette">Category</string>
+    <string name="bouton_annuler_AjouterRecette">Cancel</string>
+    <string name="bouton_enregistrer_AjouterRecette">Save</string>
+    <string name="bouton_recettes_ToutesRecettes">The recipes 😋</string>
+    <string name="msg_recetteDetail_supprimer">Recipe deleted</string>
+    <string name="text_oui">Yes</string>
+    <string name="titre_supprimerRecette">Delete the recipe</string>
+    <string name="confirmation_textSupprimer">Are you sure you want to delete this recipe? This action is irreversible.</string>
+    <string name="text_nouvelle_recette_annuler">New recipe canceled</string>
+    <string name="etapeNumero_creation_recette">Step %1$d</string>
+    <string name="text_aucunRecetteTrouve">No Recipes found</string>
+    <string name="msgCondition1_AjoutRecette">Please fill in all fields</string>
+    <string name="msgCondition2_AjoutRecette">Please add at least one step</string>
+    <string name="msgCondition3_AjoutRecette">Please remove the empty steps</string>
+    <string name="msgCondition4_AjoutRecette">A recipe with this name already exists.</string>
+    <string name="recetteEnregistrer_succes">Recipe successfully saved</string>
+    <string name="recetteModifiee_succes">Recipe successfully modified</string>
 
 </resources>

@@ -84,7 +84,8 @@ class AjouterOuEditerRecetteActivity() : AppCompatActivity() {
         // 4. Gestion du bouton Annuler
         val btnAnnuler: Button = findViewById(R.id.btnCancel)
         btnAnnuler.setOnClickListener {
-            Toast.makeText(this, "Nouvelle recette annulée", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,
+                getString(R.string.text_nouvelle_recette_annuler), Toast.LENGTH_SHORT).show()
             finish()
         }
 

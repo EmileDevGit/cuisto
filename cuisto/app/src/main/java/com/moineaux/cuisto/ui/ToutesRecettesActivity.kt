@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
@@ -47,7 +48,7 @@ class ToutesRecettesActivity : AppCompatActivity() {
         }
 
         viewModel.messageRecetteVide.observe(this) { message ->
-            Toast.makeText(this, "Aucun Recette trouvé", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.text_aucunRecetteTrouve), Toast.LENGTH_LONG).show()
         }
 
 

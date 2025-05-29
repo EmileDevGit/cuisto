@@ -40,7 +40,7 @@ class EtapeAdapter(
     override fun onBindViewHolder(holder: EtapeViewHolder, position: Int) {
         val etape = getItem(position) // <-- Récupère l'étape à afficher
         val editTextEtape = holder.tietEtape // <-- Récupère le champ d'édition
-        editTextEtape.hint = "Étape ${position + 1}"
+        editTextEtape.hint = holder.itemView.context.getString(R.string.etapeNumero_creation_recette, position + 1)
 
         (editTextEtape.tag as? TextWatcher)?.let { editTextEtape.removeTextChangedListener(it) } // <-- Supprime le TextWatcher précédent pour éviter les problèmes de synchronisation
 
