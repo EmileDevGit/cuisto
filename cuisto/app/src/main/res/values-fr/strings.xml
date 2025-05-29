@@ -8,5 +8,23 @@
     <string name="bouton_signe_plus">+</string>
     <string name="textview_ingredients_recetteDetail">Les Ingrédients</string>
     <string name="textview_Etapes_recetteDetail">Les étapes de la préparation</string>
-    <string name="textview_categorie_RecetteDetail">Categorie |</string>
+    <string name="textview_categorie_RecetteDetail">"Categorie | "</string>
+    <string name="editText_nomRecette_ajouterRecette">Nomme ta recette</string>
+    <string name="editText_categorie_ajouterRecette">Catégorie</string>
+    <string name="bouton_annuler_AjouterRecette">Annuler</string>
+    <string name="bouton_enregistrer_AjouterRecette">Enregistrer</string>
+    <string name="bouton_recettes_ToutesRecettes">Les recettes 😋</string>
+    <string name="msg_recetteDetail_supprimer">Recette supprimée</string>
+    <string name="text_oui">Oui</string>
+    <string name="titre_supprimerRecette">Supprimer la recette</string>
+    <string name="confirmation_textSupprimer">Êtes-vous sûr de vouloir supprimer cette recette ? Cette action est irréversible.</string>
+    <string name="text_nouvelle_recette_annuler">Nouvelle recette annulée</string>
+    <string name="etapeNumero_creation_recette">Étape %1$d</string>
+    <string name="text_aucunRecetteTrouve">Aucun Recette trouvé</string>
+    <string name="msgCondition1_AjoutRecette">Veuillez remplir tous les champs</string>
+    <string name="msgCondition2_AjoutRecette">Veuillez ajouter au moins une étape</string>
+    <string name="msgCondition3_AjoutRecette">Veuillez retirer les étapes vides</string>
+    <string name="msgCondition4_AjoutRecette">Une recette avec ce nom existe déjà.</string>
+    <string name="recetteEnregistrer_succes">Recette enregistrée avec succès</string>
+    <string name="recetteModifiee_succes">Recette modifiée avec succès</string>
 </resources>

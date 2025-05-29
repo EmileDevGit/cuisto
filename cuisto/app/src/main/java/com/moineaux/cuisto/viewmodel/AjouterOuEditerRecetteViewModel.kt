@@ -16,6 +16,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import androidx.core.net.toUri
+import com.moineaux.cuisto.R
 
 class AjouterOuEditerRecetteViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -171,17 +172,19 @@ class AjouterOuEditerRecetteViewModel(application: Application) : AndroidViewMod
         // Validation des étapes
         val etapes = _etapes.value
         if (nom.isBlank() || ingredients.isBlank() || categorieNom.isBlank() || imageUri == null) {
-            _message.value = "Veuillez remplir tous les champs"
+            _message.value = getApplication<Application>().getString(R.string.msgCondition1_AjoutRecette)
             return
         }
 
         if (etapes.isNullOrEmpty()) {
-            _message.value = "Veuillez ajouter au moins une étape"
+            _message.value =
+                getApplication<Application>().getString(R.string.msgCondition2_AjoutRecette)
             return
         }
 
         if (etapes.any { it.description.isBlank() }) {
-            _message.value = "Veuillez retirer les étapes vides"
+            _message.value =
+                getApplication<Application>().getString(R.string.msgCondition3_AjoutRecette)
             return
         }
 
@@ -193,7 +196,7 @@ class AjouterOuEditerRecetteViewModel(application: Application) : AndroidViewMod
                     db.recetteDao().recetteParNom(nom)
                 }
                 if (recetteExistante != null) {
-                    _message.postValue("Une recette avec ce nom existe déjà.")
+                    _message.postValue(getApplication<Application>().getString(R.string.msgCondition4_AjoutRecette))
                     return@launch
                 }
             }
@@ -222,7 +225,11 @@ class AjouterOuEditerRecetteViewModel(application: Application) : AndroidViewMod
                 }
             }
 
-            _message.postValue("Recette ${if (estNouvelleRecette) "enregistrée" else "modifiée"} avec succès")
+            if (estNouvelleRecette) {
+                _message.postValue(getApplication<Application>().getString(R.string.recetteEnregistrer_succes))
+            } else {
+                _message.postValue(getApplication<Application>().getString(R.string.recetteModifiee_succes))
+            }
             _fermerActivity.postValue(true)
         }
     }

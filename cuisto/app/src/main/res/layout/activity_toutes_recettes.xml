@@ -39,7 +39,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/fond_champ_recherche"
                 android:drawableStart="@android:drawable/ic_menu_search"
-                android:hint="Recherche une recette ..."
+                android:hint="@string/barre_recherche_indice"
                 android:imeOptions="actionSearch"
                 android:singleLine="true"
                 android:padding="12dp"
@@ -52,7 +52,7 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/bouton_arrondi"
-                android:text="+"
+                android:text="@string/bouton_signe_plus"
                 android:textColor="@android:color/white"
                 android:textSize="24sp" />
         </LinearLayout>
@@ -61,7 +61,7 @@
             android:id="@+id/btn_recettes"
             android:layout_width="190dp"
             android:layout_height="48dp"
-            android:text="Les recettes 😋"
+            android:text="@string/bouton_recettes_ToutesRecettes"
             android:textSize="20sp"
             android:textAllCaps="false"
             android:textColor="@android:color/white"

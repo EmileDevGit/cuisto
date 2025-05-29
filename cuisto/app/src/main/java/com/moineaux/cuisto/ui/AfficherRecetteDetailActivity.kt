@@ -77,16 +77,17 @@ class AfficherRecetteDetailActivity : AppCompatActivity() {
         val btnSupprimerRecette: Button = findViewById(R.id.btnSupprimerRecette)
         btnSupprimerRecette.setOnClickListener {
             AlertDialog.Builder(this)
-                .setTitle("Supprimer la recette")
-                .setMessage("Êtes-vous sûr de vouloir supprimer cette recette ? Cette action est irréversible.")
-                .setPositiveButton("Oui") { _, _ ->
+                .setTitle(getString(R.string.titre_supprimerRecette))
+                .setMessage(getString(R.string.confirmation_textSupprimer))
+                .setPositiveButton(getString(R.string.text_oui)) { _, _ ->
                     recetteDetailViewModel.supprimerRecette(idRecette)
-                    Toast.makeText(this, "Recette supprimée", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        getString(R.string.msg_recetteDetail_supprimer), Toast.LENGTH_SHORT).show()
                     finish() // Fermer l'activité après la suppression
                     val intention = Intent(this, ToutesRecettesActivity::class.java)
                     startActivity(intention)
                 }
-                .setNegativeButton("Annuler", null)
+                .setNegativeButton(getString(R.string.bouton_annuler_AjouterRecette), null)
                 .show()
         }
         recetteDetailViewModel.isMock.observe(this) { mockValue ->

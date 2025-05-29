@@ -48,7 +48,7 @@ class ToutesRecettesActivity : AppCompatActivity() {
         }
 
         viewModel.messageRecetteVide.observe(this) { message ->
-            Toast.makeText(this, "Aucun Recette trouvé", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.text_aucunRecetteTrouve), Toast.LENGTH_LONG).show()
         }
 
 
