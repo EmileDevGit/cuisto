@@ -36,7 +36,6 @@ class AjouterRecetteActivity() : AppCompatActivity() {
     private lateinit var adapter: EtapeAdapter
     private lateinit var itemTouchHelper: ItemTouchHelper
     private lateinit var btnChoisirImage: ImageButton
-    private lateinit var btnEnregistrer: Button
 
 
     private val imagePickerLauncher = registerForActivityResult(
