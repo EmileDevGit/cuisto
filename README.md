@@ -19,8 +19,10 @@ Une analyse détaillée des fonctionnalitées et de l'architecture de l'applicat
 est disponible dans le fichier `analyse.md`
 | Responsable | Description |
 | :--- | :--- |
-| Émile       | Ajouter / Modifier/Supprimer une recette|
 | Émile       | Stockage dans une base de donnée locale SQL|
+| Émile       | CRUD Recette|
+| Émile       | CRUD Catégorie|
+| Émile       | Passage entre les activités|
 | Kelly       | Conception maquette |
 | Kelly       | Introduction |
 | Kelly       | Remplissage de la base de donnee + Compression images |
@@ -29,6 +31,8 @@ est disponible dans le fichier `analyse.md`
 | Kelly       | Recette par categorie |
 | Kristopher  | Barre de recherche, I18n|
 | Kristopher  | Afficher une recette en détail|
+
+Bien que ce tableau explique les fonctionnalités clé de chacun, beaucoup de collaboration à eu lieux entre celles-ci
 
 
 [//]: # (Links)
